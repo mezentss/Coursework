@@ -13,6 +13,7 @@ public class EmployeeView {
         System.out.println("ID: " + employee.getId());
         System.out.println("Имя: " + employee.getName());
         System.out.println("Адрес: " + employee.getAddress());
+        System.out.println("Должность: " + employee.getPost());
     }
 
     public void displayAllEmployees(List<Employee> employees) {
@@ -30,8 +31,10 @@ public class EmployeeView {
         String name = scanner2.nextLine();
         System.out.print("Введите адрес сотрудника: ");
         String address = scanner2.nextLine();
+        System.out.print("Введите должность сотрудника: ");
+        String post = scanner2.nextLine();
 
-        Employee employee = new Employee(id, name, address);
+        Employee employee = new Employee(id, name, address, post);
         _controller.addEmployee(employee);
     }
 
@@ -42,11 +45,11 @@ public class EmployeeView {
         Employee employee = _controller.getEmployeeById(id);
 
         if (employee != null) {
-            System.out.print("Введите новое имя сотрудника: ");
-            String name = scanner.nextLine();
+            System.out.print("Введите новую должность сотрудника: ");
+            String post = scanner.nextLine();
             System.out.print("Введите новый адрес сотрудника: ");
             String address = scanner.nextLine();
-            employee.setName(name);
+            employee.setPost(post);
             employee.setAddress(address);
             _controller.updateEmployee(employee);
         } else {

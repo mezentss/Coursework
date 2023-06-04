@@ -8,8 +8,8 @@ import java.util.List;
 public class EmployeeDAOImpl implements EmployeeDAO {
     private static final String SELECT_BY_ID = "SELECT * FROM Employees WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Employees";
-    private static final String INSERT = "INSERT INTO Employees VALUES (?, ?, ?)";
-    private static final String UPDATE = "UPDATE Employees SET Name = ?, Address = ? WHERE ID = ?";
+    private static final String INSERT = "INSERT INTO Employees VALUES (?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE Employees SET Address = ?, Post = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM Employees WHERE ID = ?";
 
     private Connection _connection;
@@ -28,7 +28,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 return new Employee(
                         rs.getInt("ID"),
                         rs.getString("Name"),
-                        rs.getString("Address")
+                        rs.getString("Address"),
+                        rs.getString("Post")
                 );
             }
         } catch (SQLException e) {
@@ -49,7 +50,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 Employee employee = new Employee(
                         rs.getInt("ID"),
                         rs.getString("Name"),
-                        rs.getString("Address")
+                        rs.getString("Address"),
+                        rs.getString("Post")
                 );
                 employees.add(employee);
             }
@@ -66,6 +68,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             statement.setInt(1, employee.getId());
             statement.setString(2, employee.getName());
             statement.setString(3, employee.getAddress());
+            statement.setString(4, employee.getPost());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +80,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         try (PreparedStatement statement = _connection.prepareStatement(UPDATE)) {
             statement.setString(1, employee.getName());
             statement.setString(2, employee.getAddress());
-            statement.setInt(3, employee.getId());
+            statement.setString(3, employee.getPost());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

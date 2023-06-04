@@ -82,7 +82,6 @@ public class CustomerDAOImpl implements CustomersDAO {
             statement.setString(1, customer.getName());
             statement.setString(2, customer.getAddress());
             statement.setString(3, customer.getPhone());
-            statement.setInt(4, customer.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -90,7 +90,6 @@ public class CarDAOImpl implements CarDAO {
             statement.setString(3, car.getModel());
             statement.setString(4, car.getColor());
             statement.setInt(5, car.getOwnerID());
-            statement.setInt(6, car.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -86,7 +86,6 @@ public class PartDAOImpl implements PartDAO {
             statement.setString(2, part.getModel());
             statement.setString(3, part.getSerialNumber());
             statement.setInt(4, part.getPrice());
-            statement.setInt(5, part.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
