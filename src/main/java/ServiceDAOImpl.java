@@ -94,7 +94,6 @@ public class ServiceDAOImpl implements ServiceDAO {
             statement.setInt(4, service.getTimeWorked());
             statement.setString(5, service.getStartDate());
             statement.setString(6, service.getEndDate());
-            statement.setInt(7, service.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

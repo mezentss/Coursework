@@ -28,36 +28,24 @@ public class ServiceView {
     }
 
     public void addService() throws ClassNotFoundException {
-        Connection connection = null;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2258_coursework",
-                    "std_2258_coursework", "00000000");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        CarDAO customersDAO = new CarDAOImpl(connection);
-        CarController controller = new CarController(customersDAO);
-        CarView view = new CarView(controller);
-
         Scanner scanner1 = new Scanner(System.in);
         Scanner scanner2 = new Scanner(System.in);
         System.out.print("Введите ID услуги: ");
         int id = scanner1.nextInt();
         System.out.print("Введите ID автомобиля: ");
         int carId = scanner1.nextInt();
-        Car car = controller.getCarById(carId);
+        System.out.print("Введите ID сотрудника, выполневшего услугу: ");
+        int employeeID = scanner1.nextInt();
         System.out.print("Введите пробег: ");
         int mileage = scanner1.nextInt();
-        int employeeId = car.getOwnerID();
-        System.out.print("Введите время работы: ");
+        int employeeId = employeeID;
+        System.out.print("Введите время работы в часах: ");
         int timeWorked = scanner1.nextInt();
         System.out.print("Введите дату начала работы: ");
         String startDate  = scanner2.nextLine();
-        System.out.print("Введите дату окончания работы: ");
-        String endDate  = scanner2.nextLine();
-
+        String date [] =startDate.split("-");
+        int end = (int) Math.ceil(timeWorked/24)+ Integer.parseInt(date[2]);
+        String endDate = date[0]+"-"+date[1]+"-"+end;
         Service service = new Service(id, carId, mileage, employeeId, timeWorked, startDate, endDate);
         _controller.addService(service);
     }
