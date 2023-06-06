@@ -1,7 +1,7 @@
 public class AccountController {
-    private AccountDAO _dao;
+    private AccountDAOImpl _dao;
 
-    public AccountController(AccountDAO dao) {
+    public AccountController(AccountDAOImpl dao) {
         _dao = dao;
     }
 

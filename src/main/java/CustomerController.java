@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class CustomerController {
-    private CustomersDAO _dao;
+    private CustomerDAOImpl _dao;
 
-    public CustomerController(CustomersDAO dao) {
+    public CustomerController(CustomerDAOImpl dao) {
         _dao = dao;
     }
 

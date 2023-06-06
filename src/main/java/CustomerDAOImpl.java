@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CustomerDAOImpl implements CustomersDAO {
+public class CustomerDAOImpl {
     private static final String SELECT_BY_ID = "SELECT * FROM Customers WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Customers";
     private static final String INSERT = "INSERT INTO Customers VALUES (?, ?, ?, ?)";
@@ -19,7 +19,6 @@ public class CustomerDAOImpl implements CustomersDAO {
         _connection = connection;
     }
 
-    @Override
     public Customer getCustomerById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -40,7 +39,6 @@ public class CustomerDAOImpl implements CustomersDAO {
         return null;
     }
 
-    @Override
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
 
@@ -63,7 +61,6 @@ public class CustomerDAOImpl implements CustomersDAO {
         return customers;
     }
 
-    @Override
     public void addCustomer(Customer customer) {
         try (PreparedStatement statement = _connection.prepareStatement(INSERT)) {
             statement.setInt(1, customer.getId());
@@ -76,7 +73,6 @@ public class CustomerDAOImpl implements CustomersDAO {
         }
     }
 
-    @Override
     public void updateCustomer(Customer customer) {
         try (PreparedStatement statement = _connection.prepareStatement(UPDATE)) {
             statement.setString(1, customer.getName());
@@ -88,7 +84,6 @@ public class CustomerDAOImpl implements CustomersDAO {
         }
     }
 
-    @Override
     public void deleteCustomer(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setInt(1, id);

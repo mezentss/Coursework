@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class SaleController {
-    private SaleDAO _dao;
+    private SaleDAOImpl _dao;
 
-    public SaleController(SaleDAO dao) {
+    public SaleController(SaleDAOImpl dao) {
         _dao = dao;
     }
 

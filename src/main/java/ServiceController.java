@@ -2,9 +2,9 @@
 import java.util.List;
 
 public class ServiceController {
-    private ServiceDAO _dao;
+    private ServiceDAOImpl _dao;
 
-    public ServiceController(ServiceDAO dao) {
+    public ServiceController(ServiceDAOImpl dao) {
         _dao = dao;
     }
 

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
-public class AccountDAOImpl implements AccountDAO {
+public class AccountDAOImpl{
     private static final String SELECT_BY_LOGIN = "SELECT * FROM Accounts WHERE Login = ?";
     private static final String DELETE = "DELETE FROM Accounts WHERE Login = ?";
 
@@ -23,7 +23,6 @@ public class AccountDAOImpl implements AccountDAO {
         _connection = connection;
     }
 
-    @Override
     public Account getAccountByLogin(String login, String password) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_LOGIN)) {
             statement.setString(1, login);
@@ -42,7 +41,6 @@ public class AccountDAOImpl implements AccountDAO {
         return null;
     }
 
-    @Override
     public void deleteAccount(String login) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setString(1, login);

@@ -3,9 +3,9 @@
 import java.util.List;
 
 public class EmployeeController {
-    private EmployeeDAO _dao;
+    private EmployeeDAOImpl _dao;
 
-    public EmployeeController(EmployeeDAO dao) {
+    public EmployeeController(EmployeeDAOImpl dao) {
         _dao = dao;
     }
 

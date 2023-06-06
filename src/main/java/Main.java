@@ -34,7 +34,7 @@ public class Main extends Application{
                     "std_2258_coursework", "00000000");
 
 
-           /* EmployeeDAO dao = new EmployeeDAOImpl(connection);
+            EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);
             EmployeeController controller1 = new EmployeeController(dao);
             EmployeeView view1 = new EmployeeView(controller1);
             Scanner scanner = new Scanner(System.in);
@@ -110,7 +110,7 @@ public class Main extends Application{
                             System.out.println("6. Выйти");
                             System.out.print("Выберите действие: ");
 
-                            PartDAO partDAO = new PartDAOImpl(connection);
+                            PartDAOImpl partDAO = new PartDAOImpl(connection);
                             PartController controller2 = new PartController(partDAO);
                             PartView view2 = new PartView(controller2);
 
@@ -162,7 +162,7 @@ public class Main extends Application{
                             System.out.println("6. Выйти");
                             System.out.print("Выберите действие: ");
 
-                            CarDAO carDAO = new CarDAOImpl(connection);
+                            CarDAOImpl carDAO = new CarDAOImpl(connection);
                             CarController controller3 = new CarController(carDAO);
                             CarView view3 = new CarView(controller3);
 
@@ -213,7 +213,7 @@ public class Main extends Application{
                             System.out.println("6. Выйти");
                             System.out.print("Выберите действие: ");
 
-                            CustomersDAO customersDAO = new CustomerDAOImpl(connection);
+                            CustomerDAOImpl customersDAO = new CustomerDAOImpl(connection);
                             CustomerController controller4 = new CustomerController(customersDAO);
                             CustomerView view4 = new CustomerView(controller4);
 
@@ -255,7 +255,7 @@ public class Main extends Application{
 
                     case 5:
                         while (true) {
-                            ServiceDAO serviceDAO = new ServiceDAOImpl(connection);
+                            ServiceDAOImpl serviceDAO = new ServiceDAOImpl(connection);
                             ServiceController controller5 = new ServiceController(serviceDAO);
                             ServiceView view5 = new ServiceView(controller5);
 
@@ -304,7 +304,7 @@ public class Main extends Application{
                     case 6:
                         while (true) {
 
-                            SaleDAO saleDAO = new SaleDAOImpl(connection);
+                            SaleDAOImpl saleDAO = new SaleDAOImpl(connection);
                             SaleController controller6 = new SaleController(saleDAO);
                             SaleView view6 = new SaleView(controller6);
 
@@ -363,7 +363,7 @@ public class Main extends Application{
                         System.out.println("Некорректный выбор.");
                         break;
                 }
-            }*/
+            }
                 }
         catch(Exception e){
                     System.out.println(e);

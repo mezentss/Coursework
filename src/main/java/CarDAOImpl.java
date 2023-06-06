@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CarDAOImpl implements CarDAO {
+public class CarDAOImpl{
     private static final String SELECT_BY_ID = "SELECT * FROM Cars WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Cars";
     private static final String INSERT = "INSERT INTO Cars VALUES (?, ?, ?, ?, ?, ?)";
@@ -19,7 +19,6 @@ public class CarDAOImpl implements CarDAO {
         this.conn = conn;
     }
 
-    @Override
     public Car getCarById(int id) {
         try (PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -42,7 +41,6 @@ public class CarDAOImpl implements CarDAO {
         return null;
     }
 
-    @Override
     public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<>();
 
@@ -67,7 +65,6 @@ public class CarDAOImpl implements CarDAO {
         return cars;
     }
 
-    @Override
     public void addCar(Car car) {
         try (PreparedStatement statement = conn.prepareStatement(INSERT)) {
             statement.setInt(1, car.getId());
@@ -82,7 +79,6 @@ public class CarDAOImpl implements CarDAO {
         }
     }
 
-    @Override
     public void updateCar(Car car) {
         try (PreparedStatement statement = conn.prepareStatement(UPDATE)) {
             statement.setString(1, car.getLicensePlate());
@@ -96,7 +92,6 @@ public class CarDAOImpl implements CarDAO {
         }
     }
 
-    @Override
     public void deleteCar(int id) {
         try (PreparedStatement statement = conn.prepareStatement(DELETE)) {
             statement.setInt(1, id);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServiceDAOImpl implements ServiceDAO {
+public class ServiceDAOImpl{
     private static final String SELECT_BY_ID = "SELECT * FROM Services WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Services";
     private static final String INSERT = "INSERT INTO Services VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -19,7 +19,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         _connection = connection;
     }
 
-    @Override
     public Service getServiceById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -43,7 +42,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         return null;
     }
 
-    @Override
     public List<Service> getAllServices() {
         List<Service> services = new ArrayList<>();
 
@@ -69,7 +67,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         return services;
     }
 
-    @Override
     public void addService(Service service) {
         try (PreparedStatement statement = _connection.prepareStatement(INSERT)) {
             statement.setInt(1, service.getId());
@@ -85,7 +82,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         }
     }
 
-    @Override
     public void updateService(Service service) {
         try (PreparedStatement statement = _connection.prepareStatement(UPDATE)) {
             statement.setInt(1, service.getCarID());
@@ -100,7 +96,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         }
     }
 
-    @Override
     public void deleteService(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setInt(1, id);

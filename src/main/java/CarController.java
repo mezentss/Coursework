@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class CarController {
-    private CarDAO _dao;
+    private CarDAOImpl _dao;
 
-    public CarController(CarDAO dao) {
+    public CarController(CarDAOImpl dao) {
         _dao = dao;
     }
 

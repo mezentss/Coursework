@@ -2,9 +2,9 @@
 import java.util.List;
 
 public class PartController {
-    private PartDAO _dao;
+    private PartDAOImpl _dao;
 
-    public PartController(PartDAO dao) {
+    public PartController(PartDAOImpl dao) {
         _dao = dao;
     }
 

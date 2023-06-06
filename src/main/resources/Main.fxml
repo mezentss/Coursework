@@ -4,28 +4,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            style="-fx-background-color: f80000;" xmlns="http://javafx.com/javafx/20.0.1"
-            fx:controller="SystemLoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f80000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SystemLoginController">
    <children>
       <AnchorPane layoutY="88.0" prefHeight="312.0" prefWidth="600.0" style="-fx-background-color: ffffff;">
          <children>
             <TextField fx:id="loginField" layoutX="225.0" layoutY="125.0" promptText="Логин" />
             <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="161.0" promptText="Пароль" />
-            <Label layoutX="216.0" layoutY="70.0" style="-fx-background-color: f8f8ff;" text="Вход в систему" textFill="#592b91">
+            <Label layoutX="189.0" layoutY="70.0" text="Вход в систему">
                <font>
-                  <Font name="Book Antiqua" size="24.0" />
+                  <Font name="Book Antiqua" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="authSiginButton" layoutX="264.0" layoutY="209.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="72.0" style="-fx-background-color: ffffff;" text="Войти" textFill="#3d2c59">
+            <Button fx:id="authSiginButton" layoutX="264.0" layoutY="209.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="72.0" style="-fx-background-color: ffffff; -fx-border-color: BLACK; -fx-border-radius: 10;" text="Войти">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
+      <ImageView fitHeight="251.0" fitWidth="206.0" layoutX="24.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="216.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f80000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPageController">
    <children>
-      <Pane layoutY="81.0" prefHeight="319.0" prefWidth="600.0" style="-fx-background-color: ffffff;">
+      <Pane layoutY="88.0" prefHeight="312.0" prefWidth="600.0" style="-fx-background-color: ffffff;">
          <children>
-            <Button layoutX="30.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Сотрудники">
+            <Button layoutX="30.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="Сотрудники">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="234.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Автомобили">
+            <Button layoutX="234.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="Автомобили">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="429.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="  Владельцы &#10;автомобилей">
+            <Button layoutX="429.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="  Владельцы &#10;автомобилей">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="234.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Услуги">
+            <Button layoutX="234.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="Услуги">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="30.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Сборки">
+            <Button layoutX="30.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="Сборки">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="429.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Детали">
+            <Button layoutX="429.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e; -fx-border-radius: 10;" text="Детали">
                <font>
                   <Font name="Bookman Old Style" size="15.0" />
                </font>
@@ -48,5 +49,15 @@
             </Text>
          </children>
       </Pane>
+      <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="216.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="251.0" fitWidth="206.0" layoutX="24.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

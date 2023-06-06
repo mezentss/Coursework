@@ -6,7 +6,7 @@ import java.sql.Connection;
         import java.util.List;
 
 
-public class SaleDAOImpl implements SaleDAO {
+public class SaleDAOImpl {
     private static final String SELECT_BY_ID = "SELECT * FROM Sales  WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Sales ";
     private static final String INSERT = "INSERT INTO Sales  VALUES (?, ?, ?)";
@@ -22,7 +22,7 @@ public class SaleDAOImpl implements SaleDAO {
         _connection = connection;
     }
 
-    @Override
+
     public Sale getSaleById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -42,7 +42,7 @@ public class SaleDAOImpl implements SaleDAO {
         return null;
     }
 
-    @Override
+
     public List<Sale> getAllSales() {
         List<Sale> sales = new ArrayList<>();
 
@@ -51,9 +51,9 @@ public class SaleDAOImpl implements SaleDAO {
 
             while (rs.next()) {
                 Sale sale = new Sale(
-                        rs.getInt("ID "),
-                        rs.getInt("ServiceID "),
-                        rs.getInt("PartID ")
+                        rs.getInt("ID"),
+                        rs.getInt("ServiceID"),
+                        rs.getInt("PartID")
                 );
                 sales.add(sale);
             }
@@ -64,7 +64,7 @@ public class SaleDAOImpl implements SaleDAO {
         return sales;
     }
 
-    @Override
+
     public void addSale(Sale sale) {
         try (PreparedStatement statement = _connection.prepareStatement(INSERT)) {
             statement.setInt(1, sale.getID());
@@ -76,7 +76,7 @@ public class SaleDAOImpl implements SaleDAO {
         }
     }
 
-    @Override
+
     public void getSum(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(GET_SUM)) {
             statement.setInt(1, id);
@@ -90,7 +90,7 @@ public class SaleDAOImpl implements SaleDAO {
         }
     }
 
-    @Override
+
     public void deleteSale(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setInt(1, id);

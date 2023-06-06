@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartDAOImpl implements PartDAO {
+public class PartDAOImpl{
     private static final String SELECT_BY_ID = "SELECT * FROM Parts WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Parts";
     private static final String INSERT = "INSERT INTO Parts VALUES (?, ?, ?, ?, ?)";
@@ -19,7 +19,6 @@ public class PartDAOImpl implements PartDAO {
         _connection = connection;
     }
 
-    @Override
     public Part getPartById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -41,7 +40,6 @@ public class PartDAOImpl implements PartDAO {
         return null;
     }
 
-    @Override
     public List<Part> getAllParts() {
         List<Part> parts = new ArrayList<>();
 
@@ -65,7 +63,6 @@ public class PartDAOImpl implements PartDAO {
         return parts;
     }
 
-    @Override
     public void addPart(Part part) {
         try (PreparedStatement statement = _connection.prepareStatement(INSERT)) {
             statement.setInt(1, part.getId());
@@ -79,7 +76,6 @@ public class PartDAOImpl implements PartDAO {
         }
     }
 
-    @Override
     public void updatePart(Part part) {
         try (PreparedStatement statement = _connection.prepareStatement(UPDATE)) {
             statement.setString(1, part.getCategory());
@@ -92,7 +88,6 @@ public class PartDAOImpl implements PartDAO {
         }
     }
 
-    @Override
     public void deletePart(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setInt(1, id);

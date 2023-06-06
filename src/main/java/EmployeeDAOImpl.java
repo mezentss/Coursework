@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class EmployeeDAOImpl {
     private static final String SELECT_BY_ID = "SELECT * FROM Employees WHERE ID = ?";
     private static final String SELECT_ALL = "SELECT * FROM Employees";
     private static final String INSERT = "INSERT INTO Employees VALUES (?, ?, ?, ?)";
@@ -18,7 +18,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         _connection = connection;
     }
 
-    @Override
     public Employee getEmployeeById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);
@@ -39,7 +38,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return null;
     }
 
-    @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
 
@@ -62,7 +60,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employees;
     }
 
-    @Override
     public void addEmployee(Employee employee) {
         try (PreparedStatement statement = _connection.prepareStatement(INSERT)) {
             statement.setInt(1, employee.getId());
@@ -75,7 +72,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
     }
 
-    @Override
     public void updateEmployee(Employee employee) {
         try (PreparedStatement statement = _connection.prepareStatement(UPDATE)) {
             statement.setString(1, employee.getName());
@@ -87,7 +83,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
     }
 
-    @Override
     public void deleteEmployee(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
             statement.setInt(1, id);
