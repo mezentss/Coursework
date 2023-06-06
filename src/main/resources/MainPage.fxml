@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f80000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPageController">
+   <children>
+      <Pane layoutY="81.0" prefHeight="319.0" prefWidth="600.0" style="-fx-background-color: ffffff;">
+         <children>
+            <Button layoutX="30.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Сотрудники">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="234.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Автомобили">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="429.0" layoutY="111.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="  Владельцы &#10;автомобилей">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="234.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Услуги">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="30.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Сборки">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="429.0" layoutY="207.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="133.0" style="-fx-background-color: ffffffff; -fx-border-color: ff2e2e;" text="Детали">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Button>
+            <Text layoutX="41.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите данные, с которыми планируете работать" textAlignment="CENTER" wrappingWidth="518.9367065429688">
+               <font>
+                  <Font name="Bookman Old Style" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
