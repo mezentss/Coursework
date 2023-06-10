@@ -36,7 +36,8 @@ public class SystemLoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
-                controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
+                //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
+                controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
             } catch (IOException e) {

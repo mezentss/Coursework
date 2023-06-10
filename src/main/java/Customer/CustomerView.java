@@ -1,3 +1,7 @@
+package Customer;
+
+import Customer.Customer;
+
 import java.util.List;
 import java.util.Scanner;
 

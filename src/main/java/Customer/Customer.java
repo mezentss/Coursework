@@ -1,3 +1,5 @@
+package Customer;
+
 public class Customer {
     private int _id;
     private String _name, _address, _phone;

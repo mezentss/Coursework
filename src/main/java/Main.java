@@ -1,40 +1,59 @@
-import java.sql.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-
+import Car.CarDAOImpl;
 import javafx.application.Application;
-import javafx. fxml.FXMLLoader;
-import javafx.scene. Parent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
         Parent root = loader.load();
         SystemLoginController controller = loader.getController();
         controller.setMainStage(primaryStage);
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+
+       /* FXMLLoader loader2 = new FXMLLoader(getClass().getResource("MainPage.fxml"));
         Parent root2 = loader2.load();
         MainPageController controller2 = loader2.getController();
+        controller2.setMainStage(primaryStage);
+
+        FXMLLoader loader3 = new FXMLLoader(getClass().getResource("Cars.fxml"));
+        Parent root3 = loader3.load();
+        CarPageController controller3 = loader3.getController();
+        controller3.setMainStage(primaryStage);*/
+
         controller.setMainStage(primaryStage);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        /*controller2.setMainStage(primaryStage);
+        Scene scene2 = new Scene(root2);
+        primaryStage.setScene(scene2);
+
+        controller3.setMainStage(primaryStage);
+        Scene scene3 = new Scene(root3);
+        primaryStage.setScene(scene3);
+        primaryStage.show();*/
+
     }
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        launch(args);
         Connection connection;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(
                     "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2258_coursework",
                     "std_2258_coursework", "00000000");
+            CarDAOImpl carDAO = new CarDAOImpl(connection);
+            launch(args);
 
-
-            EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);
+           /* EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);
             EmployeeController controller1 = new EmployeeController(dao);
             EmployeeView view1 = new EmployeeView(controller1);
             Scanner scanner = new Scanner(System.in);
@@ -363,7 +382,7 @@ public class Main extends Application{
                         System.out.println("Некорректный выбор.");
                         break;
                 }
-            }
+            }*/
                 }
         catch(Exception e){
                     System.out.println(e);

@@ -1,3 +1,6 @@
+package Part;
+
+import Part.Part;
 
 import java.util.List;
 import java.util.Scanner;

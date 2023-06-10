@@ -1,3 +1,6 @@
+package Employee;
+
+import Employee.Employee;
 
 import java.util.List;
 import java.util.Scanner;

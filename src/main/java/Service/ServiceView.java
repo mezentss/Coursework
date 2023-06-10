@@ -1,6 +1,7 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+package Service;
+
+import Service.Service;
+
 import java.util.List;
 import java.util.Scanner;
 

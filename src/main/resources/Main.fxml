@@ -9,32 +9,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f80000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SystemLoginController">
+<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SystemLoginController">
    <children>
-      <AnchorPane layoutY="88.0" prefHeight="312.0" prefWidth="600.0" style="-fx-background-color: ffffff;">
+      <AnchorPane layoutY="88.0" prefHeight="364.0" prefWidth="706.0" style="-fx-background-color: ffffff;">
          <children>
-            <TextField fx:id="loginField" layoutX="225.0" layoutY="125.0" promptText="Логин" />
-            <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="161.0" promptText="Пароль" />
-            <Label layoutX="189.0" layoutY="70.0" text="Вход в систему">
+            <TextField fx:id="loginField" layoutX="277.0" layoutY="123.0" promptText="Логин" />
+            <PasswordField fx:id="passwordField" layoutX="278.0" layoutY="159.0" promptText="Пароль" />
+            <Label layoutX="241.0" layoutY="68.0" text="Вход в систему" textFill="#371310">
                <font>
                   <Font name="Book Antiqua" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="authSiginButton" layoutX="264.0" layoutY="209.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="72.0" style="-fx-background-color: ffffff; -fx-border-color: BLACK; -fx-border-radius: 10;" text="Войти">
+            <Button fx:id="authSiginButton" layoutX="316.0" layoutY="207.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="72.0" style="-fx-background-color: FF2C24; -fx-border-color: FF2C24; -fx-border-radius: 4;" text="Войти" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="251.0" fitWidth="206.0" layoutX="24.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="220.0" fitWidth="206.0" layoutX="421.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="216.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="263.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="112.0" fitWidth="216.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
          </image>
       </ImageView>
    </children>

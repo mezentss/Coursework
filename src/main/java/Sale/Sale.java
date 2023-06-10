@@ -1,3 +1,5 @@
+package Sale;
+
 public class Sale {
     private  int _ID, _serviceID, _partID;
 

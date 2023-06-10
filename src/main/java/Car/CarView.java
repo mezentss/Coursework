@@ -1,3 +1,5 @@
+package Car;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +11,7 @@ public class CarView {
     }
 
     public void displayCar(Car car) {
-        System.out.println("ID: " + car.getId());
+        System.out.println("ID: " + car.getID());
         System.out.println("Номерной знак: " + car.getLicensePlate());
         System.out.println("Производитель: " + car.getBrand());
         System.out.println("Модель: " + car.getModel());

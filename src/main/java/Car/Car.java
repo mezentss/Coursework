@@ -1,3 +1,5 @@
+package Car;
+
 public class Car {
     private int _id, _ownerId;
     private String _licensePlate, _brand, _model, _color;
@@ -12,10 +14,7 @@ public class Car {
 
     }
 
-    public int getId() {
-        return _id;
-    }
-
+    public int getID() {return _id;}
     public int getOwnerID() {
         return _ownerId;
     }
@@ -59,4 +58,5 @@ public class Car {
     public void setOwnerID(int ownerId) {
         _ownerId = ownerId;
     }
+
 }

@@ -1,3 +1,5 @@
+package Account;
+
 public class Account {
     private String _login, _password;
     public Account(String login, String password){

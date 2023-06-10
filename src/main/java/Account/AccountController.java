@@ -1,3 +1,7 @@
+package Account;
+
+import Account.Account;
+
 public class AccountController {
     private AccountDAOImpl _dao;
 

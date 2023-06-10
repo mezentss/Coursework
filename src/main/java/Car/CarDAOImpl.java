@@ -1,3 +1,8 @@
+package Car;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +18,13 @@ public class CarDAOImpl{
     private static final String UPDATE = "UPDATE Cars SET LicensePlate = ?, Brand = ?, Model = ?, Color = ?, WHERE ID = ?";
     private static final String DELETE = "DELETE FROM Cars WHERE ID = ?";
 
-    private Connection conn;
+    public static Connection conn;
 
     public CarDAOImpl(Connection conn) {
         this.conn = conn;
     }
+
+    public Connection getConn(){return conn;}
 
     public Car getCarById(int id) {
         try (PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID)) {
@@ -67,7 +74,7 @@ public class CarDAOImpl{
 
     public void addCar(Car car) {
         try (PreparedStatement statement = conn.prepareStatement(INSERT)) {
-            statement.setInt(1, car.getId());
+            statement.setInt(1, car.getID());
             statement.setString(2, car.getLicensePlate());
             statement.setString(3, car.getBrand());
             statement.setString(4, car.getModel());
@@ -99,5 +106,26 @@ public class CarDAOImpl{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ObservableList <Car> getCars(){
+        ObservableList <Car> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                list.add(new Car(
+                        rs.getInt("ID"),
+                        rs.getString("LicensePlate"),
+                        rs.getString("Brand"),
+                        rs.getString("Model"),
+                        rs.getString("Color"),
+                        rs.getInt("OwnerID")));
+            }
+        } catch (Exception e){
+
+        }
+        return list;
     }
 }

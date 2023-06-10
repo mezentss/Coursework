@@ -1,3 +1,6 @@
+package Part;
+
+import Part.Part;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

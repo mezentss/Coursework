@@ -1,3 +1,7 @@
+package Sale;
+
+import Sale.Sale;
+
 import java.util.List;
 import java.util.Scanner;
 
