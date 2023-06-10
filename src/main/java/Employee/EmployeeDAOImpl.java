@@ -1,6 +1,8 @@
 package Employee;
 
-import Employee.Employee;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,11 +18,12 @@ public class EmployeeDAOImpl {
     private static final String UPDATE = "UPDATE Employees SET Address = ?, Post = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM Employees WHERE ID = ?";
 
-    private Connection _connection;
+    public static Connection _connection;
 
     public EmployeeDAOImpl(Connection connection) {
         _connection = connection;
     }
+
 
     public Employee getEmployeeById(int id) {
         try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_ID)) {
@@ -94,5 +97,26 @@ public class EmployeeDAOImpl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ObservableList<Employee> getEmployees(){
+        ObservableList <Employee> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = _connection.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Address"),
+                        rs.getString("Post")
+                );
+                list.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

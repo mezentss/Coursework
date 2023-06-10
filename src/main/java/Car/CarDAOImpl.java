@@ -24,7 +24,6 @@ public class CarDAOImpl{
         this.conn = conn;
     }
 
-    public Connection getConn(){return conn;}
 
     public Car getCarById(int id) {
         try (PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID)) {

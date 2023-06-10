@@ -1,7 +1,5 @@
 package Employee;
 
-import Employee.Employee;
-
 import java.util.List;
 
 public class EmployeeController {

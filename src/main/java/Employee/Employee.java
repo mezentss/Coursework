@@ -25,6 +25,7 @@ public class Employee {
         return _name;
     }
     public String getPost(){return  _post;}
+    public void setId(int id){ _id = id; }
 
     public void setName(String name) {
         _name = name;

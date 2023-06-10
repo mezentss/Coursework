@@ -8,64 +8,30 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static Car.CarDAOImpl.conn;
 
 public class CarPageController  {
 
-    @FXML
-    private Button Add;
 
     @FXML
-    private TableColumn<Car, String> Brand;
+    private Button Add, Delete, Update;
 
     @FXML
-    private TableColumn<Car, String> Color;
+    private TableColumn<Car, String> Model, LicensePlate, Color, Brand;
 
     @FXML
-    private Button Delete;
-
-    @FXML
-    private TableColumn<Car, Integer> ID;
-
-    @FXML
-    private TableColumn<Car, String> LicensePlate;
-
-    @FXML
-    private MenuButton Menu;
-
-    @FXML
-    private TableColumn<Car, String> Model;
-
-    @FXML
-    private TableColumn<Car, Integer> OwnerID;
-
-    @FXML
-    private Button Update;
+    private TableColumn<Car, Integer> ID, OwnerID;
 
     @FXML
     private TableView<Car> Table;
 
 
-    public TextField txt_Brand;
-
-    public TextField txt_Color;
-
-
-    public TextField txt_LicensePlate;
-
-
-    public TextField txt_Model;
-
-
-    public TextField txt_OwnerId;
-    public TextField txt_ID;
+    public TextField txt_Brand, txt_Color, txt_LicensePlate, txt_Model, txt_OwnerId, txt_ID;
 
     ObservableList <Car> list;
     int index = -1;
-    ResultSet rs = null;
     PreparedStatement pst = null;
     private Stage mainStage;
 

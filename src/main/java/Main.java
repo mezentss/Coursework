@@ -1,4 +1,5 @@
 import Car.CarDAOImpl;
+import Employee.EmployeeDAOImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,6 +52,7 @@ public class Main extends Application{
                     "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2258_coursework",
                     "std_2258_coursework", "00000000");
             CarDAOImpl carDAO = new CarDAOImpl(connection);
+            EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl(connection);
             launch(args);
 
            /* EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);
