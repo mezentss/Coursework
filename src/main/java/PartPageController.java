@@ -1,5 +1,4 @@
-import Car.Car;
-import Car.CarController;
+import Part.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,32 +18,31 @@ import java.sql.SQLException;
 
 import static Car.CarController.conn;
 
-public class CarPageController  {
+public class PartPageController  {
     @FXML
     private Button Add, Delete, Update, MenuBotton;
     @FXML
-    private TableColumn<Car, String> Model, LicensePlate, Color, Brand;
+    private TableColumn<Part, String> Model, Category, SerialNumber;
     @FXML
-    private TableColumn<Car, Integer> ID, OwnerID;
+    private TableColumn<Part, Integer> ID, Price;
     @FXML
-    private TableView<Car> Table;
-    public TextField txt_Brand, txt_Color, txt_LicensePlate, txt_Model, txt_OwnerId, txt_ID;
-    ObservableList <Car> list;
+    private TableView<Part> Table;
+    public TextField txt_Category, txt_SerialNumber, txt_Price, txt_Model, txt_ID;
+    ObservableList <Part> list;
     int index = -1;
     PreparedStatement pst = null;
     private Stage mainStage;
-    private static final String INSERT = "INSERT INTO Cars VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Cars WHERE ID = ?";
+    private static final String INSERT = "INSERT INTO Parts VALUES (?, ?, ?, ?, ?)";
+    private static final String DELETE = "DELETE FROM Parts WHERE ID = ?";
 
     public void initialize(){
-        ID.setCellValueFactory(new PropertyValueFactory<Car, Integer>("ID"));
-        LicensePlate.setCellValueFactory(new PropertyValueFactory<Car, String>("LicensePlate"));
-        Brand.setCellValueFactory(new PropertyValueFactory<Car, String>("Brand"));
-        Model.setCellValueFactory(new PropertyValueFactory<Car, String>("Model"));
-        Color.setCellValueFactory(new PropertyValueFactory<Car, String>("Color"));
-        OwnerID.setCellValueFactory(new PropertyValueFactory<Car, Integer>("OwnerID"));
+        ID.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Id"));
+        Category.setCellValueFactory(new PropertyValueFactory<Part, String>("Category"));
+        Model.setCellValueFactory(new PropertyValueFactory<Part, String>("Model"));
+        SerialNumber.setCellValueFactory(new PropertyValueFactory<Part, String>("SerialNumber"));
+        Price.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Price"));
 
-        list = CarController.getCars();
+        list = PartController.getParts();
         Table.setItems(list);
 
         MenuBotton.setOnAction(actionEvent -> {
@@ -73,25 +71,23 @@ public class CarPageController  {
             return;
         }
         txt_ID.setText(ID.getCellData(index).toString());
-        txt_LicensePlate.setText(LicensePlate.getCellData(index));
-        txt_Brand.setText(Brand.getCellData(index));
+        txt_Category.setText(Category.getCellData(index));
         txt_Model.setText(Model.getCellData(index));
-        txt_Color.setText(Color.getCellData(index));
-        txt_OwnerId.setText(OwnerID.getCellData(index).toString());
+        txt_SerialNumber.setText(SerialNumber.getCellData(index));
+        txt_Price.setText(Price.getCellData(index).toString());
     }
 
-   public void addCar() {
+    public void addPart() {
         try {
             pst = conn.prepareStatement(INSERT);
-            pst.setString(2, txt_LicensePlate.getText());
-            pst.setString(3, txt_Brand.getText());
-            pst.setString(4, txt_Model.getText());
-            pst.setString(5, txt_Color.getText());
-            pst.setInt(6, Integer.parseInt(txt_OwnerId.getText()));
+            pst.setString(2, txt_Category.getText());
+            pst.setString(3, txt_Model.getText());
+            pst.setString(4, txt_SerialNumber.getText());
+            pst.setInt(5, Integer.parseInt(txt_Price.getText()));
             pst.setInt(1, Integer.parseInt(txt_ID.getText()));
 
 
-            JOptionPane.showMessageDialog(null, "Автомобиль успешно добавлен");
+            JOptionPane.showMessageDialog(null, "Деталь успешно добавлена");
             pst.execute();
             initialize();
 
@@ -103,17 +99,15 @@ public class CarPageController  {
     public void Edit(){
         try {
             String id = txt_ID.getText();
-            String licensePlate = txt_LicensePlate.getText();
-            String brand = txt_Brand.getText();
+            String category = txt_Category.getText();
             String model = txt_Model.getText();
-            String color = txt_Color.getText();
-            String ownerId = txt_OwnerId.getText();
+            String serialNumber = txt_SerialNumber.getText();
+            String price = txt_Price.getText();
 
-            String sql = "UPDATE Cars SET LicensePlate = '" + licensePlate +
-                    "', Brand = '" + brand +
-                    "', Model = '" + model +
-                    "', Color = '" + color +
-                    "', OwnerID = '" + ownerId +
+            String sql = "UPDATE Parts SET LicensePlate = '" + category +
+                    "', Brand = '" + model +
+                    "', Model = '" + serialNumber +
+                    "', Color = '" + price +
                     "' WHERE ID = " + id + "; ";
 
             pst = conn.prepareStatement(sql);

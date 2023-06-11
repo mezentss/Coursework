@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EmployeePageController">
+<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SalesPageController">
     <children>
         <Pane layoutX="-4.0" layoutY="98.0" prefHeight="354.0" prefWidth="710.0" style="-fx-background-color: ffffff;">
             <children>
@@ -17,10 +17,9 @@
                     <children>
                         <Button fx:id="Update" layoutX="54.0" layoutY="344.0" mnemonicParsing="false" onAction="#Edit" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Изменить" />
                         <Button fx:id="Delete" layoutX="54.0" layoutY="398.0" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Удалить" />
-                        <Button fx:id="Add" layoutX="54.0" layoutY="290.0" mnemonicParsing="false" onAction="#getEmployees" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Добавить" />
-                        <TextField fx:id="txt_Name" layoutX="27.0" layoutY="166.0" promptText="ФИО" />
-                        <TextField fx:id="txt_Address" layoutX="27.0" layoutY="199.0" promptText="Адрес" />
-                        <TextField fx:id="txt_Post" layoutX="27.0" layoutY="232.0" promptText="Должность" />
+                        <Button fx:id="Add" layoutX="54.0" layoutY="290.0" mnemonicParsing="false" onAction="#addSale" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Добавить" />
+                        <TextField fx:id="txt_ServiceID" layoutX="27.0" layoutY="166.0" promptText="Сборка" />
+                        <TextField fx:id="txt_PartID" layoutX="27.0" layoutY="199.0" promptText="Деталь" />
                         <TextField fx:id="txt_ID" layoutX="27.0" layoutY="133.0" promptText="ID" />
                         <ImageView fitHeight="111.0" fitWidth="247.0" layoutX="2.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -29,12 +28,11 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <TableView fx:id="Table" layoutX="200.0" layoutY="-13.0" onMouseClicked="#getSelected" prefHeight="367.0" prefWidth="510.0">
+                <TableView fx:id="Table" layoutX="200.0" onMouseClicked="#getSelected" prefHeight="354.0" prefWidth="200.0">
                     <columns>
                         <TableColumn fx:id="ID" prefWidth="48.79998779296875" text="ID" />
-                        <TableColumn fx:id="Name" prefWidth="176.0" text="Имя" />
-                        <TableColumn fx:id="Address" minWidth="9.5999755859375" prefWidth="167.99996948242188" text="Адрес" />
-                        <TableColumn fx:id="Post" minWidth="0.0" prefWidth="116.800048828125" text="Должность" />
+                        <TableColumn fx:id="ServiceID" prefWidth="75.20001220703125" text="Сборка" />
+                        <TableColumn fx:id="PartID" minWidth="9.5999755859375" prefWidth="72.79998779296875" text="Деталь" />
                     </columns>
                 </TableView>
             </children></Pane>

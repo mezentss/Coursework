@@ -1,33 +1,36 @@
 package Part;
 
-import Part.Part;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class PartController {
-    private PartDAOImpl _dao;
+    public static Connection conn;
 
-    public PartController(PartDAOImpl dao) {
-        _dao = dao;
+    public PartController(Connection conn) {
+        this.conn = conn;
     }
+    private static final String SELECT_ALL = "SELECT * FROM Parts";
+    public static ObservableList <Part> getParts(){
+        ObservableList <Part> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
 
-    public Part getPartById(int id) {
-        return _dao.getPartById(id);
-    }
+            while (rs.next()){
+                list.add(new Part(
+                        rs.getInt("ID"),
+                        rs.getString("Category"),
+                        rs.getString("Model"),
+                        rs.getString("SerialNumber"),
+                        rs.getInt("Price")));
+            }
+        } catch (Exception e){
 
-    public List<Part> getAllParts() {
-        return _dao.getAllParts();
-    }
-
-    public void addPart(Part part) {
-        _dao.addPart(part);
-    }
-
-    public void updatePart(Part part) {
-        _dao.updatePart(part);
-    }
-
-    public void deletePart(int id) {
-        _dao.deletePart(id);
+        }
+        return list;
     }
 }

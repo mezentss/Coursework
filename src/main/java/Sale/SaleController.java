@@ -1,30 +1,54 @@
 package Sale;
 
-import Sale.Sale;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class SaleController {
-    private SaleDAOImpl _dao;
+    private static final String SELECT_ALL = "SELECT * FROM Sales ";
+    private static final String GET_SUM = "SELECT SUM(Price)\n" +
+            "FROM Sales\n" +
+            "JOIN Parts ON Sales.PartID = Parts.ID\n" +
+            "WHERE Sales.ServiceID = ?";
 
-    public SaleController(SaleDAOImpl dao) {
-        _dao = dao;
+    private static Connection _connection;
+
+    public SaleController(Connection connection) {
+        _connection = connection;
+    }
+    public static ObservableList<Sale> getSales(){
+        ObservableList <Sale> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = _connection.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                list.add(new Sale(
+                        rs.getInt("ID"),
+                        rs.getInt("ServiceID"),
+                        rs.getInt("PartID")));
+            }
+        } catch (Exception e){
+
+        }
+        return list;
     }
 
-    public Sale getSaleById(int id) {
-        return _dao.getSaleById(id);
+    public void getSum(int id) {
+        try (PreparedStatement statement = _connection.prepareStatement(GET_SUM)) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int sum = rs.getInt(1);
+                System.out.println("Сумма для услуги с ID" + id + ": " + sum);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
-    public List<Sale> getAllSales() {
-        return _dao.getAllSales();
-    }
-
-    public void addService(Sale sale) {
-        _dao.addSale(sale);
-    }
-
-    public void deleteSale(int id) {
-        _dao.deleteSale(id);
-    }
-    public void getSum(int id) {_dao.getSum(id);}
 }

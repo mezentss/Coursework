@@ -1,5 +1,9 @@
-import Car.CarDAOImpl;
-import Employee.EmployeeDAOImpl;
+import Car.CarController;
+import Customer.CustomerController;
+import Employee.EmployeeController;
+import Part.PartController;
+import Sale.SaleController;
+import Service.ServiceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +30,7 @@ public class Main extends Application{
 
         FXMLLoader loader3 = new FXMLLoader(getClass().getResource("Cars.fxml"));
         Parent root3 = loader3.load();
-        CarPageController controller3 = loader3.getController();
+        Car.CarPageController controller3 = loader3.getController();
         controller3.setMainStage(primaryStage);*/
 
         controller.setMainStage(primaryStage);
@@ -51,8 +55,12 @@ public class Main extends Application{
             connection = DriverManager.getConnection(
                     "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2258_coursework",
                     "std_2258_coursework", "00000000");
-            CarDAOImpl carDAO = new CarDAOImpl(connection);
-            EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl(connection);
+            CarController carDAO = new CarController(connection);
+            EmployeeController employeeDAO = new EmployeeController(connection);
+            SaleController saleController = new SaleController(connection);
+            CustomerController customerController = new CustomerController(connection);
+            PartController partController = new PartController(connection);
+            ServiceController serviceController = new ServiceController(connection);
             launch(args);
 
            /* EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);

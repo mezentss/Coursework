@@ -1,33 +1,39 @@
 package Customer;
 
-import Customer.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import java.util.List;
 
 public class CustomerController {
-    private CustomerDAOImpl _dao;
+    private static final String SELECT_ALL = "SELECT * FROM Customers";
+    public static Connection _connection;
 
-    public CustomerController(CustomerDAOImpl dao) {
-        _dao = dao;
+    public CustomerController(Connection connection) {
+        _connection = connection;
     }
 
-    public Customer getCustomerById(int id) {
-        return _dao.getCustomerById(id);
-    }
+    public static ObservableList<Customer> getCustomers(){
+        ObservableList <Customer> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = _connection.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
 
-    public List<Customer> getAllCCustomers() {
-        return _dao.getAllCustomers();
-    }
-
-    public void addCustomer(Customer customer) {
-        _dao.addCustomer(customer);
-    }
-
-    public void updateCustomer(Customer customer) {
-        _dao.updateCustomer(customer);
-    }
-
-    public void deleteCustomer(int id) {
-        _dao.deleteCustomer(id);
+            while (rs.next()) {
+                Customer customer = new Customer(
+                        rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Address"),
+                        rs.getString("Phone")
+                );
+                list.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

@@ -1,32 +1,38 @@
 package Employee;
 
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EmployeeController {
-    private EmployeeDAOImpl _dao;
-
-    public EmployeeController(EmployeeDAOImpl dao) {
-        _dao = dao;
+    private static final String SELECT_ALL = "SELECT * FROM Employees";
+    public static Connection _connection;
+    public EmployeeController(Connection connection) {
+        _connection = connection;
     }
 
-    public Employee getEmployeeById(int id) {
-        return _dao.getEmployeeById(id);
-    }
+    public static ObservableList<Employee> getEmployees(){
+        ObservableList <Employee> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = _connection.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
 
-    public List<Employee> getAllEmployees() {
-        return _dao.getAllEmployees();
-    }
-
-    public void addEmployee(Employee employee) {
-        _dao.addEmployee(employee);
-    }
-
-    public void updateEmployee(Employee employee) {
-        _dao.updateEmployee(employee);
-    }
-
-    public void deleteEmployee(int id) {
-        _dao.deleteEmployee(id);
+            while (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Address"),
+                        rs.getString("Post")
+                );
+                list.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
-

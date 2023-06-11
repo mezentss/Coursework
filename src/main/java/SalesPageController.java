@@ -1,4 +1,5 @@
-import Employee.*;
+import Sale.Sale;
+import Sale.SaleController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,37 +19,30 @@ import java.sql.SQLException;
 
 import static Employee.EmployeeController._connection;
 
-public class EmployeePageController  {
-
-
+public class SalesPageController  {
     @FXML
-    private Button Add, Delete, Update, MenuBotton;
-
+    private TableColumn<Sale, String>  ServiceID, PartID;
     @FXML
-    private TableColumn<Employee, String> Name, Address, Post;
-
+    private TableColumn<Sale, Integer> ID;
     @FXML
-    private TableColumn<Employee, Integer> ID;
-
+    private TableView<Sale> Table;
     @FXML
-    private TableView<Employee> Table;
-
-
-    public TextField txt_Name, txt_Address, txt_Post, txt_ID;
-
-    ObservableList <Employee> list;
+    private Button MenuBotton;
+    public TextField txt_ServiceID, txt_PartID, txt_ID;
+    ObservableList <Sale> list;
     int index = -1;
-    PreparedStatement pst = null;
     private Stage mainStage;
+    PreparedStatement pst = null;
+    private static final String INSERT = "INSERT INTO Sales VALUES (?, ?, ?)";
+    private static final String DELETE = "DELETE FROM Sales WHERE ID = ?";
 
 
     public void initialize(){
-        ID.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("Id"));
-        Name.setCellValueFactory(new PropertyValueFactory<Employee, String>("Name"));
-        Address.setCellValueFactory(new PropertyValueFactory<Employee, String>("Address"));
-        Post.setCellValueFactory(new PropertyValueFactory<Employee, String>("Post"));
+        ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        ServiceID.setCellValueFactory(new PropertyValueFactory<>("ServiceID"));
+        PartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
 
-        list = EmployeeController.getEmployees();
+        list = SaleController.getSales();
         Table.setItems(list);
 
         MenuBotton.setOnAction(actionEvent -> {
@@ -66,31 +60,23 @@ public class EmployeePageController  {
         });
     }
 
-    public void setMainStage(Stage primaryStage) {
-        mainStage = primaryStage;
-    }
-
-
     public void getSelected(javafx.scene.input.MouseEvent mouseEvent){
         index = Table.getSelectionModel().getSelectedIndex();
         if (index <=-1){
             return;
         }
         txt_ID.setText(ID.getCellData(index).toString());
-        txt_Name.setText(Name.getCellData(index));
-        txt_Address.setText(Address.getCellData(index));
-        txt_Post.setText(Post.getCellData(index));
+        txt_ServiceID.setText(ServiceID.getCellData(index));
+        txt_PartID.setText(PartID.getCellData(index));
 
     }
 
-    public void getEmployees() {
-        String sql = "INSERT INTO Employees values (?, ?, ?, ?)";
+    public void addSale() {
         try {
-            pst = _connection.prepareStatement(sql);
+            pst = _connection.prepareStatement(INSERT);
             pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-            pst.setString(2, txt_Name.getText());
-            pst.setString(3, txt_Address.getText());
-            pst.setString(4, txt_Post.getText());
+            pst.setString(2, txt_ServiceID.getText());
+            pst.setString(3, txt_PartID.getText());
 
 
             JOptionPane.showMessageDialog(null, "Сотрудник успешно добавлен");
@@ -105,13 +91,11 @@ public class EmployeePageController  {
     public void Edit(){
         try {
             String id = txt_ID.getText();
-            String Name = txt_Name.getText();
-            String Address = txt_Address.getText();
-            String Post = txt_Post.getText();
+            String ServiceID = txt_ServiceID.getText();
+            String PartID = txt_PartID.getText();
 
-            String sql = "UPDATE Employees SET Name = '" + Name +
-                    "', Address = '" + Address +
-                    "', Post = '" + Post +
+            String sql = "UPDATE Sales SET ServiceID = '" + ServiceID +
+                    "', PartID = '" + PartID +
                     "' WHERE ID = " + id + "; ";
 
             pst = _connection.prepareStatement(sql);
@@ -119,13 +103,13 @@ public class EmployeePageController  {
             pst.executeUpdate();
             initialize();
         }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Информация не обновлена.");
         }
     }
 
     public void Delete(){
-        String sql = "DELETE FROM Employees WHERE ID = ?";
         try {
-            pst = _connection.prepareStatement(sql);
+            pst = _connection.prepareStatement(DELETE);
             pst.setString(1, txt_ID.getText());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Информация удалена");
@@ -133,7 +117,11 @@ public class EmployeePageController  {
 
         }
         catch (Exception e){
-
+            JOptionPane.showMessageDialog(null, "Информация не удалена.");
         }
+    }
+
+    public void setMainStage(Stage primaryStage) {
+        mainStage = primaryStage;
     }
 }

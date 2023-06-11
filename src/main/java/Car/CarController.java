@@ -1,33 +1,35 @@
 package Car;
-
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class CarController {
-    private CarDAOImpl _dao;
+    public static Connection conn;
 
-    public CarController(CarDAOImpl dao) {
-        _dao = dao;
+    public CarController(Connection conn) {
+        this.conn = conn;
     }
+    private static final String SELECT_ALL = "SELECT * FROM Cars";
+    public static ObservableList <Car> getCars(){
+        ObservableList <Car> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement(SELECT_ALL);
+            ResultSet rs = ps.executeQuery();
 
-    public Car getCarById(int id) {
-        return _dao.getCarById(id);
+            while (rs.next()){
+                list.add(new Car(
+                        rs.getInt("ID"),
+                        rs.getString("LicensePlate"),
+                        rs.getString("Brand"),
+                        rs.getString("Model"),
+                        rs.getString("Color"),
+                        rs.getInt("OwnerID")));
+            }
+        } catch (Exception e){
+
+        }
+        return list;
     }
-
-    public List<Car> getAllCars() {
-        return _dao.getAllCars();
-    }
-
-    public void addCar(Car car) {
-        _dao.addCar(car);
-    }
-
-    public void updateCar(Car car) {
-        _dao.updateCar(car);
-    }
-
-    public void deleteCar(int id) {
-        _dao.deleteCar(id);
-    }
-
-
 }
