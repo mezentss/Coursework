@@ -26,8 +26,10 @@ public class EmployeeController {
                         rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getString("Address"),
-                        rs.getString("Post")
-                );
+                        rs.getString("AccessLevel"),
+                        rs.getString("Login"),
+                        rs.getString("Password")
+                        );
                 list.add(employee);
             }
         } catch (SQLException e) {

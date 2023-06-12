@@ -2,15 +2,15 @@ package Employee;
 
 public class Employee {
     private int _id;
-    private String _name;
-    private String _address;
-    private String _post;
+    private String _name, _address, _post, _login, _password;
 
-    public Employee(int id, String name, String address, String post){
+    public Employee(int id, String name, String address, String post, String login, String password){
         _id = id;
         _name = name;
         _address = address;
         _post = post;
+        _login = login;
+        _password = password;
     }
 
     public int getId() {
@@ -35,4 +35,8 @@ public class Employee {
         _address = address;
     }
     public void setPost(String post){_post = post;}
+    public String getLogin() {return _login;}
+    public String getPassword() {
+        return _password;
+    }
 }

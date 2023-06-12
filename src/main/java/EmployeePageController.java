@@ -22,38 +22,51 @@ public class EmployeePageController  {
 
 
     @FXML
-    private Button Add, Delete, Update, MenuBotton;
+    private Button Add;
+    @FXML
+    private Button Delete;
+    @FXML
+    private Button Update;
+    @FXML
+    private static Button MenuBotton;
 
     @FXML
-    private TableColumn<Employee, String> Name, Address, Post;
+    private static TableColumn<Employee, String> Name;
+    @FXML
+    private static TableColumn<Employee, String> Address;
+    @FXML
+    private static TableColumn<Employee, String> Post;
 
     @FXML
-    private TableColumn<Employee, Integer> ID;
+    private static  TableColumn<Employee, Integer> ID;
 
     @FXML
-    private TableView<Employee> Table;
+    private static TableView<Employee> Table;
 
 
-    public TextField txt_Name, txt_Address, txt_Post, txt_ID;
+    public static TextField txt_Name;
+    public static TextField txt_Address;
+    public static TextField txt_Post;
+    public static TextField txt_ID;
 
-    ObservableList <Employee> list;
+    static ObservableList <Employee> list;
     int index = -1;
-    PreparedStatement pst = null;
-    private Stage mainStage;
+    static PreparedStatement pst = null;
+    private static Stage mainStage;
 
 
-    public void initialize(){
+    public static void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("Id"));
         Name.setCellValueFactory(new PropertyValueFactory<Employee, String>("Name"));
         Address.setCellValueFactory(new PropertyValueFactory<Employee, String>("Address"));
-        Post.setCellValueFactory(new PropertyValueFactory<Employee, String>("Post"));
+        Post.setCellValueFactory(new PropertyValueFactory<Employee, String>("AccessLevel"));
 
         list = EmployeeController.getEmployees();
         Table.setItems(list);
 
         MenuBotton.setOnAction(actionEvent -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(EmployeePageController.class.getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
                 //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
@@ -83,8 +96,8 @@ public class EmployeePageController  {
 
     }
 
-    public void getEmployees() {
-        String sql = "INSERT INTO Employees values (?, ?, ?, ?)";
+    public static void getEmployees() {
+        String sql = "INSERT INTO Employees values (?, ?, ?, ?, ?, ?)";
         try {
             pst = _connection.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(txt_ID.getText()));
@@ -111,7 +124,7 @@ public class EmployeePageController  {
 
             String sql = "UPDATE Employees SET Name = '" + Name +
                     "', Address = '" + Address +
-                    "', Post = '" + Post +
+                    "', AccessLevel = '" + Post +
                     "' WHERE ID = " + id + "; ";
 
             pst = _connection.prepareStatement(sql);

@@ -1,3 +1,4 @@
+import Account.AccountController;
 import Car.CarController;
 import Customer.CustomerController;
 import Employee.EmployeeController;
@@ -18,7 +19,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
         Parent root = loader.load();
         SystemLoginController controller = loader.getController();
         controller.setMainStage(primaryStage);
@@ -61,6 +62,7 @@ public class Main extends Application{
             CustomerController customerController = new CustomerController(connection);
             PartController partController = new PartController(connection);
             ServiceController serviceController = new ServiceController(connection);
+            AccountController accountController = new AccountController(connection);
             launch(args);
 
            /* EmployeeDAOImpl dao = new EmployeeDAOImpl(connection);
