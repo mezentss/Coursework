@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SystemLoginController">
+   <children>
+      <AnchorPane fx:id="paneLogin" layoutY="81.0" prefHeight="364.0" prefWidth="706.0" style="-fx-background-color: ffffff;">
+         <children>
+            <TextField fx:id="txt_username" layoutX="277.0" layoutY="99.0" promptText="Логин" />
+            <PasswordField fx:id="txt_password" layoutX="278.0" layoutY="135.0" promptText="Пароль" />
+            <Label layoutX="241.0" layoutY="44.0" text="Вход в систему" textFill="#371310">
+               <font>
+                  <Font name="Book Antiqua" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginButton" layoutX="316.0" layoutY="207.0" mnemonicParsing="false" onAction="#Login" prefHeight="11.0" prefWidth="72.0" style="-fx-background-color: FF2C24; -fx-border-color: FF2C24; -fx-border-radius: 4;" text="Войти" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Pane layoutY="299.0" prefHeight="68.0" prefWidth="706.0" style="-fx-background-color: FF2C24;">
+               <children>
+                  <ImageView fitHeight="220.0" fitWidth="206.0" layoutX="258.0" layoutY="-73.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ComboBox fx:id="type" layoutX="278.0" layoutY="171.0" prefWidth="150.0" promptText="Должность" style="-fx-background-color: ffffffff; -fx-border-color: grey; -fx-border-radius: 4;" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="263.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="toRegistrationButton" layoutX="492.0" layoutY="32.0" mnemonicParsing="false" onAction="#SignUpPageShow" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: ffffffff; -fx-border-color: ffffffff; -fx-border-radius: 4;" text="Зарегестрироваться" textFill="#ff2c24">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="paneSignUp" layoutY="81.0" prefHeight="302.0" prefWidth="706.0" style="-fx-background-color: ffffffff;">
+         <children>
+            <TextField fx:id="txt_usernameUp" alignment="TOP_CENTER" layoutX="250.0" layoutY="159.0" prefHeight="26.0" prefWidth="206.0" promptText="Логин" />
+            <PasswordField fx:id="txt_passwordUp" alignment="TOP_CENTER" layoutX="251.0" layoutY="195.0" prefHeight="26.0" prefWidth="202.0" promptText="Пароль" />
+            <ComboBox fx:id="typeUp" layoutX="251.0" layoutY="125.0" prefHeight="27.0" prefWidth="202.0" promptText="Должность" style="-fx-background-color: ffffffff; -fx-border-color: grey; -fx-border-radius: 4;" />
+            <Button fx:id="registrationButton" layoutX="271.0" layoutY="253.0" mnemonicParsing="false" onAction="#add" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: #ff2c24; -fx-border-color: #ff2c24; -fx-border-radius: 4;" text="Зарегестрироваться" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txt_name" alignment="TOP_CENTER" layoutX="250.0" layoutY="51.0" prefHeight="26.0" prefWidth="206.0" promptText="ФИО" />
+            <TextField fx:id="txt_address" alignment="TOP_CENTER" layoutX="250.0" layoutY="87.0" prefHeight="26.0" prefWidth="206.0" promptText="Адрес" />
+            <TextField fx:id="txt_ID" alignment="TOP_CENTER" layoutX="251.0" layoutY="14.0" prefHeight="18.0" prefWidth="39.0" promptText="ID" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="112.0" fitWidth="216.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -17,7 +17,6 @@
                     <children>
                         <Button fx:id="Update" layoutX="54.0" layoutY="344.0" mnemonicParsing="false" onAction="#Edit" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Изменить" />
                         <Button fx:id="Delete" layoutX="54.0" layoutY="398.0" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Удалить" />
-                        <Button fx:id="Add" layoutX="54.0" layoutY="290.0" mnemonicParsing="false" onAction="#getEmployees" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Добавить" />
                         <TextField fx:id="txt_Name" layoutX="27.0" layoutY="166.0" promptText="ФИО" />
                         <TextField fx:id="txt_Address" layoutX="27.0" layoutY="199.0" promptText="Адрес" />
                         <TextField fx:id="txt_Post" layoutX="27.0" layoutY="232.0" promptText="Должность" />

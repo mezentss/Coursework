@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class MainPageController {
     @FXML
-    private Button Cars, Customers, Details, Employees, Sales, Services;
+    private Button Cars, Customers, Details, Employees, Sales, Services, exit, personalAccount;
     private Stage mainStage;
 
     public void setMainStage(Stage stage) {
@@ -21,6 +21,8 @@ public class MainPageController {
         Customers.setOnAction(this::handleCustomersButton);
         Details.setOnAction(this::handlePartsButton);
         Services.setOnAction(this::handleServicesButton);
+        exit.setOnAction(this::exitButton);
+        personalAccount.setOnAction(this::accountButton);
     }
 
     @FXML
@@ -102,6 +104,36 @@ public class MainPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Services.fxml"));
             Parent root = loader.load();
             ServicePageController controller = loader.getController();
+            controller.setMainStage(mainStage);
+            Scene scene = new Scene(root);
+            mainStage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void exitButton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
+            Parent root = loader.load();
+            SystemLoginController controller = loader.getController();
+            controller.setMainStage(mainStage);
+            Scene scene = new Scene(root);
+            mainStage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void accountButton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonalAccount.fxml"));
+            Parent root = loader.load();
+            PersonalAccountController controller = loader.getController();
             controller.setMainStage(mainStage);
             Scene scene = new Scene(root);
             mainStage.setScene(scene);

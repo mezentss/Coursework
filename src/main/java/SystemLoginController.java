@@ -21,16 +21,18 @@ import static Account.AccountController._connection;
 public class SystemLoginController {
     @FXML
     private Button loginButton, registrationButton, toRegistrationButton;
+
     @FXML
     private AnchorPane paneLogin, paneSignUp;
     @FXML
     private PasswordField txt_password, txt_passwordUp;
     @FXML
-    private TextField txt_username, txt_usernameUp, txt_address, txt_name, txt_ID;;
+    private TextField txt_username, txt_usernameUp, txt_address, txt_name, txt_ID;
 
     @FXML
     private ComboBox<String> type, typeUp;
     private Stage mainStage;
+    public static int ID;
     PreparedStatement pst = null;
     ResultSet rs = null;
     public void setMainStage(Stage stage) {
@@ -41,8 +43,8 @@ public class SystemLoginController {
     void initialize() {
         paneLogin.setVisible(true);
         paneSignUp.setVisible(false);
-        typeUp.getItems().addAll("Владелец", "Администратор", "Сотрудник");
-        type.getItems().addAll("Владелец", "Администратор", "Сотрудник");
+        typeUp.getItems().addAll("Владелец", "Администратор", "Механик");
+        type.getItems().addAll("Владелец", "Администратор", "Механик");
     }
 
     public void LoginPageShow(){
@@ -56,12 +58,13 @@ public class SystemLoginController {
     }
 
     @FXML
-    public void Login() throws  Exception{
-        String sql = "SELECT * FROM Employees WHERE Login = ? and Password = ?";
+    public void Login() throws Exception{
+        String sql = "SELECT ID FROM Employees WHERE Login = ? AND Password = ? AND AccessLevel = ?";
         try {
             pst = _connection.prepareStatement(sql);
             pst.setString(1, txt_username.getText());
             pst.setString(2, txt_password.getText());
+            pst.setString(3, type.getValue());
             rs = pst.executeQuery();
             if(rs.next()){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
@@ -70,6 +73,8 @@ public class SystemLoginController {
                 controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
+                ID = rs.getInt(1);
+                System.out.println(ID);
             }else {
                 JOptionPane.showMessageDialog(null, "Данные некорректны");
             }
@@ -89,6 +94,7 @@ public class SystemLoginController {
             pst.setString(4, txt_username.getText());
             pst.setString(5, txt_password.getText());
             pst.setString(6, txt_ID.getText());
+            ID = Integer.parseInt(txt_ID.getText());
 
 
             JOptionPane.showMessageDialog(null, "Сотрудник успешно добавлен");

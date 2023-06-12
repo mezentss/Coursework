@@ -1,4 +1,5 @@
-import Employee.*;
+import Employee.Employee;
+import Employee.EmployeeController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import static Employee.EmployeeController._connection;
 
@@ -28,38 +28,38 @@ public class EmployeePageController  {
     @FXML
     private Button Update;
     @FXML
-    private static Button MenuBotton;
+    private  Button MenuBotton;
 
     @FXML
-    private static TableColumn<Employee, String> Name;
+    private TableColumn<Employee, String> Name;
     @FXML
-    private static TableColumn<Employee, String> Address;
+    private TableColumn<Employee, String> Address;
     @FXML
-    private static TableColumn<Employee, String> Post;
-
-    @FXML
-    private static  TableColumn<Employee, Integer> ID;
+    private TableColumn<Employee, String> Post;
 
     @FXML
-    private static TableView<Employee> Table;
+    private TableColumn<Employee, Integer> ID;
+
+    @FXML
+    private TableView<Employee> Table;
 
 
-    public static TextField txt_Name;
-    public static TextField txt_Address;
-    public static TextField txt_Post;
-    public static TextField txt_ID;
+    public TextField txt_Name;
+    public TextField txt_Address;
+    public TextField txt_Post;
+    public TextField txt_ID;
 
-    static ObservableList <Employee> list;
+    ObservableList <Employee> list;
     int index = -1;
-    static PreparedStatement pst = null;
-    private static Stage mainStage;
+    PreparedStatement pst = null;
+    private Stage mainStage;
 
 
-    public static void initialize(){
+    public void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("Id"));
         Name.setCellValueFactory(new PropertyValueFactory<Employee, String>("Name"));
         Address.setCellValueFactory(new PropertyValueFactory<Employee, String>("Address"));
-        Post.setCellValueFactory(new PropertyValueFactory<Employee, String>("AccessLevel"));
+        Post.setCellValueFactory(new PropertyValueFactory<Employee, String>("Post"));
 
         list = EmployeeController.getEmployees();
         Table.setItems(list);
@@ -96,7 +96,7 @@ public class EmployeePageController  {
 
     }
 
-    public static void getEmployees() {
+    /*public void getEmployees() {
         String sql = "INSERT INTO Employees values (?, ?, ?, ?, ?, ?)";
         try {
             pst = _connection.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class EmployeePageController  {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void Edit(){
         try {
