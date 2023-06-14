@@ -47,6 +47,6 @@
                 <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
             </image>
         </ImageView>
-        <Button fx:id="MenuBotton" layoutX="627.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" style="-fx-background-color: ffffffff;" text="Меню " />
+        <Button fx:id="MenuBotton" layoutX="627.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" style="-fx-background-color: ffffffff;" text="Назад " />
     </children>
 </AnchorPane>

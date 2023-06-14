@@ -8,6 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SalesPageController">
     <children>
@@ -35,6 +37,9 @@
                         <TableColumn fx:id="PartID" minWidth="9.5999755859375" prefWidth="72.79998779296875" text="Деталь" />
                     </columns>
                 </TableView>
+            <TextField fx:id="assemblingView" alignment="TOP_LEFT" layoutX="475.0" layoutY="141.0" prefHeight="99.0" prefWidth="150.0" />
+            <TextField fx:id="assembling" layoutX="514.0" layoutY="97.0" prefHeight="26.0" prefWidth="72.0" promptText="ID сборки" />
+            <Button fx:id="show" layoutX="502.0" layoutY="257.0" mnemonicParsing="false" onAction="#addSale" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: ffffffff; -fx-border-color: B32821; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 4;" text="Результат" />
             </children></Pane>
         <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="263.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -46,6 +51,11 @@
                 <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
             </image>
         </ImageView>
-        <Button fx:id="MenuBotton" layoutX="627.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" style="-fx-background-color: ffffffff;" text="Меню " />
+        <Button fx:id="MenuBotton" layoutX="627.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="72.0" style="-fx-background-color: ffffffff;" text="Назад " />
+      <Text layoutX="428.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите ID сборки &#10;для вычисления&#10;общей стоимости услуги" textAlignment="CENTER">
+         <font>
+            <Font name="Bookman Old Style" size="19.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

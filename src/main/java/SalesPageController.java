@@ -1,6 +1,7 @@
 import Sale.Sale;
 import Sale.SaleController;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,20 +16,19 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static Employee.EmployeeController._connection;
 
 public class SalesPageController  {
     @FXML
-    private TableColumn<Sale, String>  ServiceID, PartID;
-    @FXML
-    private TableColumn<Sale, Integer> ID;
+    private TableColumn<Sale, Integer> ID, ServiceID, PartID;
     @FXML
     private TableView<Sale> Table;
     @FXML
-    private Button MenuBotton;
-    public TextField txt_ServiceID, txt_PartID, txt_ID;
+    private Button MenuBotton, show;
+    public TextField txt_ServiceID, txt_PartID, txt_ID, assembling, assemblingView;
     ObservableList <Sale> list;
     int index = -1;
     private Stage mainStage;
@@ -41,7 +41,7 @@ public class SalesPageController  {
         ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         ServiceID.setCellValueFactory(new PropertyValueFactory<>("ServiceID"));
         PartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-
+        show.setOnAction(this::assemblingButton);
         list = SaleController.getSales();
         Table.setItems(list);
 
@@ -66,8 +66,8 @@ public class SalesPageController  {
             return;
         }
         txt_ID.setText(ID.getCellData(index).toString());
-        txt_ServiceID.setText(ServiceID.getCellData(index));
-        txt_PartID.setText(PartID.getCellData(index));
+        txt_ServiceID.setText(ServiceID.getCellData(index).toString());
+        txt_PartID.setText(PartID.getCellData(index).toString());
 
     }
 
@@ -118,6 +118,27 @@ public class SalesPageController  {
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, "Информация не удалена.");
+        }
+    }
+
+    @FXML
+    void assemblingButton(ActionEvent actionEvent) {
+        try {
+            String id = assembling.getText();
+            String sql = "SELECT SUM(Price) " +
+                    "FROM Sales " +
+                    "JOIN Parts ON Sales.PartID = Parts.ID " +
+                    "WHERE Sales.ServiceID = " + id;
+
+            pst = _connection.prepareStatement(sql);
+            pst.execute();
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String result = rs.getString(1);
+                assemblingView.setText("Стоимость услуги: \n" + result );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

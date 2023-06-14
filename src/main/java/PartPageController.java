@@ -104,10 +104,10 @@ public class PartPageController  {
             String serialNumber = txt_SerialNumber.getText();
             String price = txt_Price.getText();
 
-            String sql = "UPDATE Parts SET LicensePlate = '" + category +
-                    "', Brand = '" + model +
-                    "', Model = '" + serialNumber +
-                    "', Color = '" + price +
+            String sql = "UPDATE Parts SET Category = '" + category +
+                    "', Model = '" + model +
+                    "', SerialNumber = '" + serialNumber +
+                    "', Price = '" + price +
                     "' WHERE ID = " + id + "; ";
 
             pst = conn.prepareStatement(sql);

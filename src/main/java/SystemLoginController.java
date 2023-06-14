@@ -33,8 +33,10 @@ public class SystemLoginController {
     private ComboBox<String> type, typeUp;
     private Stage mainStage;
     public static int ID;
+    public static String accessLevel;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private String sqlAccess = "SELECT AccessLevel FROM Employees WHERE ID = ?";
     public void setMainStage(Stage stage) {
         mainStage = stage;
     }
@@ -74,26 +76,32 @@ public class SystemLoginController {
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
                 ID = rs.getInt(1);
-                System.out.println(ID);
-            }else {
-                JOptionPane.showMessageDialog(null, "Данные некорректны");
             }
         }catch (Exception e){
-
             JOptionPane.showMessageDialog(null, "Ошибка");
+        }
+        try {
+            pst = _connection.prepareStatement(sqlAccess);
+            pst.setInt(1, ID);
+            rs = pst.executeQuery();
+            if(rs.next()){
+                accessLevel = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void add(){
-        String sql = "INSERT INTO Employees (Name, Address, AccessLevel, Login, Password, ID) values ( ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Employees values ( ?, ?, ?, ?, ?, ?)";
         try {
             pst = EmployeeController._connection.prepareStatement(sql);
-            pst.setString(1, txt_name.getText());
-            pst.setString(2, txt_address.getText());
-            pst.setString(3, typeUp.getValue());
-            pst.setString(4, txt_username.getText());
-            pst.setString(5, txt_password.getText());
-            pst.setString(6, txt_ID.getText());
+            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
+            pst.setString(2, txt_name.getText());
+            pst.setString(3, txt_address.getText());
+            pst.setString(4, typeUp.getValue());
+            pst.setString(5, txt_usernameUp.getText());
+            pst.setString(6, txt_passwordUp.getText());
             ID = Integer.parseInt(txt_ID.getText());
 
 
@@ -106,10 +114,19 @@ public class SystemLoginController {
             Scene scene = new Scene(root);
             mainStage.setScene(scene);
             initialize();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            pst = _connection.prepareStatement(sqlAccess);
+            pst.setInt(1, ID);
+            rs = pst.executeQuery();
+            if(rs.next()){
+                accessLevel = rs.getString(1);
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

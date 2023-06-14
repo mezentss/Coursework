@@ -1,21 +1,42 @@
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import static Employee.EmployeeController._connection;
 
 public class PersonalAccountController {
     private Stage mainStage;
     @FXML
     private TextField address, login, name, password, post;
+    @FXML
+    private Button Change, mainPage;
     PreparedStatement pst = null;
 
     @FXML
     void initialize() {
         setEmployeeData();
+        mainPage.setOnAction(actionEvent -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+                Parent root = loader.load();
+                MainPageController controller = loader.getController();
+                controller.setMainStage(mainStage);
+                Scene scene = new Scene(root);
+                mainStage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void setMainStage(Stage stage) {
@@ -38,6 +59,29 @@ public class PersonalAccountController {
 
         } catch (SQLException ex) {
             System.out.println("Ошибка при извлечении данных о сотруднике: " + ex.getMessage());
+        }
+    }
+
+    public void Edit(){
+        try {
+            String Name = name.getText();
+            String Address = address.getText();
+            String Post = post.getText();
+            String Login = login.getText();
+            String Password = password.getText();
+
+            String sql = "UPDATE Employees SET Name = '" + Name +
+                    "', Address = '" + Address +
+                    "', Post = '" + Post +
+                    "', Login = '" + Login +
+                    "', Password = '" + Password +
+                    "' WHERE ID = " + SystemLoginController.ID + "; ";
+
+            pst = _connection.prepareStatement(sql);
+            JOptionPane.showMessageDialog(null, "Информация обновлена");
+            pst.executeUpdate();
+            initialize();
+        }catch (Exception e){
         }
     }
 }
