@@ -39,11 +39,9 @@ public class AccountPageController {
             }
         });
     }
-
     public void setMainStage(Stage stage) {
         mainStage = stage;
     }
-
     public void setEmployeeData() {
         try {
             String sql = "SELECT * FROM Employees WHERE ID = ?";
@@ -57,12 +55,10 @@ public class AccountPageController {
                 login.setText(rs.getString("Login"));
                 password.setText(rs.getString("Password"));
             }
-
         } catch (SQLException ex) {
             System.out.println("Ошибка при извлечении данных о сотруднике: " + ex.getMessage());
         }
     }
-
     public void Edit(){
         try {
             String Name = name.getText();
@@ -70,16 +66,7 @@ public class AccountPageController {
             String Post = post.getText();
             String Login = login.getText();
             String Password = password.getText();
-            System.out.println(SystemLoginController.ID);
-
-            String sql = "UPDATE Employees SET Name = '" + Name +
-                    "', Address = '" + Address +
-                    "', AccessLevel = '" + Post +
-                    "', Login = '" + Login +
-                    "', Password = '" + Password +
-                    "' WHERE ID = " + SystemLoginController.ID + "; ";
-            System.out.println(sql);
-
+            String sql = "UPDATE Employees SET Name = '" + Name + "', Address = '" + Address + "', AccessLevel = '" + Post + "', Login = '" + Login + "', Password = '" + Password + "' WHERE ID = " + SystemLoginController.ID + "; ";
             pst = _account.getConnection().prepareStatement(sql);
             JOptionPane.showMessageDialog(null, "Информация обновлена");
             pst.executeUpdate();

@@ -30,7 +30,6 @@ public class SystemLoginController {
     private PasswordField txt_password, txt_passwordUp;
     @FXML
     private TextField txt_username, txt_usernameUp, txt_address, txt_name, txt_ID;
-
     @FXML
     private ComboBox<String> type, typeUp;
     private Stage mainStage;
@@ -98,7 +97,6 @@ public class SystemLoginController {
             pst.setString(6, txt_passwordUp.getText());
             ID = Integer.parseInt(txt_ID.getText());
 
-
             JOptionPane.showMessageDialog(null, "Сотрудник успешно добавлен");
             pst.execute();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
@@ -124,4 +122,5 @@ public class SystemLoginController {
             throw new RuntimeException(e);
         }
     }
+    public String getAccessLevel(){return accessLevel;}
 }
