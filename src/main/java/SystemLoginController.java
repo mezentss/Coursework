@@ -1,4 +1,3 @@
-import Employee.EmployeeController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,13 +11,16 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Account.AccountController._connection;
 
 public class SystemLoginController {
+    private static Connection _connection;
+    public SystemLoginController (Connection connection){_connection = connection;}
+    public SystemLoginController(){}
     @FXML
     private Button loginButton, registrationButton, toRegistrationButton;
 
@@ -36,7 +38,7 @@ public class SystemLoginController {
     public static String accessLevel;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    private String sqlAccess = "SELECT AccessLevel FROM Employees WHERE ID = ?";
+    private final String sqlAccess = "SELECT AccessLevel FROM Employees WHERE ID = ?";
     public void setMainStage(Stage stage) {
         mainStage = stage;
     }
@@ -48,17 +50,10 @@ public class SystemLoginController {
         typeUp.getItems().addAll("Владелец", "Администратор", "Механик");
         type.getItems().addAll("Владелец", "Администратор", "Механик");
     }
-
-    public void LoginPageShow(){
-       paneLogin.setVisible(true);
-       paneSignUp.setVisible(false);
-    }
-
     public void SignUpPageShow(){
         paneLogin.setVisible(false);
         paneSignUp.setVisible(true);
     }
-
     @FXML
     public void Login() throws Exception{
         String sql = "SELECT ID FROM Employees WHERE Login = ? AND Password = ? AND AccessLevel = ?";
@@ -91,11 +86,10 @@ public class SystemLoginController {
             throw new RuntimeException(e);
         }
     }
-
     public void add(){
         String sql = "INSERT INTO Employees values ( ?, ?, ?, ?, ?, ?)";
         try {
-            pst = EmployeeController._connection.prepareStatement(sql);
+            pst = _connection.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(txt_ID.getText()));
             pst.setString(2, txt_name.getText());
             pst.setString(3, txt_address.getText());

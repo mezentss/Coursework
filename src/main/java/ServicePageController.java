@@ -1,5 +1,3 @@
-import Service.Service;
-import Service.ServiceController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +13,9 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import static Car.CarController.conn;
 
 public class ServicePageController  {
+    private static Service _service;
     @FXML
     private Button Add, Delete, Update, MenuBotton;
     @FXML
@@ -33,11 +29,11 @@ public class ServicePageController  {
     int index = -1;
     PreparedStatement pst = null;
     private Stage mainStage;
-    private static final String INSERT = "INSERT INTO Services VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Services WHERE ID = ?";
+    public ServicePageController(Service service){_service = service;}
+    public ServicePageController(){}
 
     public void initialize(){
-        ID.setCellValueFactory(new PropertyValueFactory<Service, Integer>("Id"));
+        ID.setCellValueFactory(new PropertyValueFactory<Service, Integer>("ID"));
         CarID.setCellValueFactory(new PropertyValueFactory<Service, Integer>("CarID"));
         TimeWorked.setCellValueFactory(new PropertyValueFactory<Service, Integer>("TimeWorked"));
         Mileage.setCellValueFactory(new PropertyValueFactory<Service, Integer>("Mileage"));
@@ -53,7 +49,6 @@ public class ServicePageController  {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
-                //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
                 controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
@@ -81,67 +76,51 @@ public class ServicePageController  {
         txt_StartDate.setText(StartDate.getCellData(index));
     }
 
-    public void addCar() {
-        try {
-            pst = conn.prepareStatement(INSERT);
-            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-            pst.setInt(2, Integer.parseInt(txt_CarID.getText()));
-            pst.setInt(3, Integer.parseInt(txt_Mileage.getText()));
-            pst.setInt(4, Integer.parseInt(txt_EmployeeID.getText()));
-            pst.setInt(5, Integer.parseInt(txt_TimeWorked.getText()));
-            pst.setString(6, txt_StartDate.getText());
-            String date [] =txt_StartDate.getText().split("-");
-            int end = (int) Math.ceil(Integer.parseInt(txt_TimeWorked.getText())/24)+ Integer.parseInt(date[2]);
-            String endDate = date[0]+"-"+date[1]+"-"+end;
-            pst.setString(7, endDate);
-
-            JOptionPane.showMessageDialog(null, "Автомобиль успешно добавлен");
-            pst.execute();
-            initialize();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void addService() {
+        int ID = Integer.parseInt(txt_ID.getText());
+        int CarID = Integer.parseInt(txt_CarID.getText());
+        int Mileage = Integer.parseInt(txt_Mileage.getText());
+        int EmployeeID = Integer.parseInt(txt_EmployeeID.getText());
+        int TimeWorked = Integer.parseInt(txt_TimeWorked.getText());
+        String StartDate = txt_StartDate.getText();
+        String date[] = StartDate.split("-");
+        int end = (int) Math.ceil(TimeWorked / 24) + Integer.parseInt(date[2]);
+        String EndDate = date[0] + "-" + date[1] + "-" + end;
+        Service service = new Service(ID, CarID, Mileage, EmployeeID, TimeWorked, StartDate, EndDate);
+        ServiceController.addService(service);
+        list.add(service);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Услуга добавлена");
     }
-
     public void Edit(){
-        try {
-            String id = txt_ID.getText();
-            String carID = txt_CarID.getText();
-            String mileage = txt_Mileage.getText();
-            String employeeID = txt_EmployeeID.getText();
-            String timeWorked = txt_TimeWorked.getText();
-            String startDate = txt_StartDate.getText();
-            String date [] =txt_StartDate.getText().split("-");
-            int end = (int) Math.ceil(Integer.parseInt(txt_TimeWorked.getText())/24)+ Integer.parseInt(date[2]);
-            String endDate = date[0]+"-"+date[1]+"-"+end;
-
-            String sql = "UPDATE Services SET CarID  = '" + carID +
-                    "', Mileage = '" + mileage +
-                    "', EmployeeID  = '" + employeeID +
-                    "', TimeWorked = '" + timeWorked +
-                    "', StartDate = '" + startDate +
-                    "', EndDate = '" + endDate +
-                    "' WHERE ID = " + id + "; ";
-
-            pst = conn.prepareStatement(sql);
-            JOptionPane.showMessageDialog(null, "Информация обновлена");
-            pst.executeUpdate();
-            initialize();
-        }catch (Exception e){
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        int CarID = Integer.parseInt(txt_CarID.getText());
+        int Mileage = Integer.parseInt(txt_Mileage.getText());
+        int EmployeeID = Integer.parseInt(txt_EmployeeID.getText());
+        int TimeWorked = Integer.parseInt(txt_TimeWorked.getText());
+        String StartDate = txt_StartDate.getText();
+        String date[] = StartDate.split("-");
+        int end = (int) Math.ceil(TimeWorked / 24) + Integer.parseInt(date[2]);
+        String EndDate = date[0] + "-" + date[1] + "-" + end;
+        Service service = new Service(ID, CarID, Mileage, EmployeeID, TimeWorked, StartDate, EndDate);
+        ServiceController.updateService(service);
+        list.set(index, service);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Информация обновлена");
     }
     public void Delete(){
-        try {
-            pst = conn.prepareStatement(DELETE);
-            pst.setString(1, txt_ID.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Информация удалена");
-            initialize();
-
-        }
-        catch (Exception e){
-
-        }
+        int id = Integer.parseInt(txt_ID.getText());
+        ServiceController.deleteService(id);
+        list.remove(index);
+        clearFields();
+        JOptionPane.showMessageDialog(null, "Информация удалена");
+    }
+    private void clearFields() {
+        txt_ID.setText("");
+        txt_CarID.setText("");
+        txt_TimeWorked.setText("");
+        txt_StartDate.setText("");
+        txt_Mileage.setText("");
+        txt_EmployeeID.setText("");
     }
 }

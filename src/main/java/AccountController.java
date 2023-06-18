@@ -1,23 +1,20 @@
-package Account;
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class AccountController {
-    private static final String SELECT_BY_LOGIN = "SELECT * FROM Accounts WHERE Login = ?";
-    private static final String DELETE = "DELETE FROM Accounts WHERE Login = ?";
+    private static Account _account;
+    private AccountPageController _accountPageController;
+    private static final String SELECT = "SELECT * FROM Employees WHERE ID = ?";
+    private static final String UPDATE = "UPDATE Employees SET Name = ?, Address = ?, AccessLevel = ?, Login = ?, Password = ? WHERE ID = " + SystemLoginController.ID + "; ";
 
-    public static Connection _connection;
-
-    public AccountController(Connection connection) {
-        _connection = connection;
+    public AccountController(Account account, AccountPageController accountPageController) {
+        _account = account;
+        _accountPageController = accountPageController;
     }
 
     public Account getAccountByLogin(String login, String password) {
-        try (PreparedStatement statement = _connection.prepareStatement(SELECT_BY_LOGIN)) {
+        try (PreparedStatement statement = _account.getConnection().prepareStatement(SELECT)) {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
 
@@ -34,20 +31,10 @@ public class AccountController {
 
         return null;
     }
-
-    public void deleteAccount(String login) {
-        try (PreparedStatement statement = _connection.prepareStatement(DELETE)) {
-            statement.setString(1, login);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Account getAccount(String login, String password) {
         Account account = null;
         try {
-            PreparedStatement stmt = _connection.prepareStatement("SELECT * FROM Accounts WHERE Login = ? AND Password = ?");
+            PreparedStatement stmt = _account.getConnection().prepareStatement("SELECT * FROM Accounts WHERE Login = ? AND Password = ?");
             stmt.setString(1, login);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
@@ -62,7 +49,7 @@ public class AccountController {
 
     public void close() {
         try {
-            _connection.close();
+            _account.getConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

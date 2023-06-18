@@ -1,4 +1,3 @@
-import Part.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +13,9 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import static Car.CarController.conn;
 
 public class PartPageController  {
+    private static Part _part;
     @FXML
     private Button Add, Delete, Update, MenuBotton;
     @FXML
@@ -32,11 +29,11 @@ public class PartPageController  {
     int index = -1;
     PreparedStatement pst = null;
     private Stage mainStage;
-    private static final String INSERT = "INSERT INTO Parts VALUES (?, ?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Parts WHERE ID = ?";
+    public PartPageController(){}
+    public PartPageController(Part part){_part = part;}
 
     public void initialize(){
-        ID.setCellValueFactory(new PropertyValueFactory<Part, Integer>("Id"));
+        ID.setCellValueFactory(new PropertyValueFactory<Part, Integer>("ID"));
         Category.setCellValueFactory(new PropertyValueFactory<Part, String>("Category"));
         Model.setCellValueFactory(new PropertyValueFactory<Part, String>("Model"));
         SerialNumber.setCellValueFactory(new PropertyValueFactory<Part, String>("SerialNumber"));
@@ -50,7 +47,6 @@ public class PartPageController  {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
-                //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
                 controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
@@ -59,12 +55,9 @@ public class PartPageController  {
             }
         });
     }
-
     public void setMainStage(Stage primaryStage) {
         mainStage = primaryStage;
     }
-
-
     public void getSelected(javafx.scene.input.MouseEvent mouseEvent){
         index = Table.getSelectionModel().getSelectedIndex();
         if (index <=-1){
@@ -76,58 +69,42 @@ public class PartPageController  {
         txt_SerialNumber.setText(SerialNumber.getCellData(index));
         txt_Price.setText(Price.getCellData(index).toString());
     }
-
     public void addPart() {
-        try {
-            pst = conn.prepareStatement(INSERT);
-            pst.setString(2, txt_Category.getText());
-            pst.setString(3, txt_Model.getText());
-            pst.setString(4, txt_SerialNumber.getText());
-            pst.setInt(5, Integer.parseInt(txt_Price.getText()));
-            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-
-
-            JOptionPane.showMessageDialog(null, "Деталь успешно добавлена");
-            pst.execute();
-            initialize();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        String Category = txt_Category.getText();
+        String Model = txt_Model.getText();
+        String SerialNumber = txt_SerialNumber.getText();
+        int Price = Integer.parseInt(txt_Price.getText());
+        Part part = new Part(ID, Category, Model, SerialNumber, Price);
+        PartController.addPart(part);
+        list.add(part);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Деталь добавлена");
     }
-
     public void Edit(){
-        try {
-            String id = txt_ID.getText();
-            String category = txt_Category.getText();
-            String model = txt_Model.getText();
-            String serialNumber = txt_SerialNumber.getText();
-            String price = txt_Price.getText();
-
-            String sql = "UPDATE Parts SET Category = '" + category +
-                    "', Model = '" + model +
-                    "', SerialNumber = '" + serialNumber +
-                    "', Price = '" + price +
-                    "' WHERE ID = " + id + "; ";
-
-            pst = conn.prepareStatement(sql);
-            JOptionPane.showMessageDialog(null, "Информация обновлена");
-            pst.executeUpdate();
-            initialize();
-        }catch (Exception e){
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        String Category = txt_Category.getText();
+        String Model = txt_Model.getText();
+        String SerialNumber = txt_SerialNumber.getText();
+        int Price = Integer.parseInt(txt_Price.getText());
+        Part part = new Part(ID, Category, Model, SerialNumber, Price);
+        PartController.updatePart(part);
+        list.set(index, part);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Информация обновлена");
     }
     public void Delete(){
-        try {
-            pst = conn.prepareStatement(DELETE);
-            pst.setString(1, txt_ID.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Информация удалена");
-            initialize();
-
-        }
-        catch (Exception e){
-
-        }
+        int id = Integer.parseInt(txt_ID.getText());
+        PartController.deletePart(id);
+        list.remove(index);
+        clearFields();
+        JOptionPane.showMessageDialog(null, "Информация удалена");
+    }
+    private void clearFields() {
+        txt_ID.setText("");
+        txt_Price.setText("");
+        txt_SerialNumber.setText("");
+        txt_Model.setText("");
+        txt_Category.setText("");
     }
 }

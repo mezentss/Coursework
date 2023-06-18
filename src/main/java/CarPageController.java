@@ -1,5 +1,3 @@
-import Car.Car;
-import Car.CarController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +12,15 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-import static Car.CarController.conn;
+public class CarPageController {
+    public CarPageController(Car car) {
+        _car = car;
+    }
 
-public class CarPageController  {
+    public CarPageController() {}
+
+    private static Car _car;
     @FXML
     private Button Add, Delete, Update, MenuBotton;
     @FXML
@@ -31,10 +32,7 @@ public class CarPageController  {
     public TextField txt_Brand, txt_Color, txt_LicensePlate, txt_Model, txt_OwnerId, txt_ID;
     ObservableList <Car> list;
     int index = -1;
-    PreparedStatement pst = null;
     private Stage mainStage;
-    private static final String INSERT = "INSERT INTO Cars VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Cars WHERE ID = ?";
 
     public void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<Car, Integer>("ID"));
@@ -65,12 +63,49 @@ public class CarPageController  {
         mainStage = primaryStage;
     }
 
+    public void addCar() {
+        int ID = Integer.parseInt(txt_ID.getText());
+        String licensePlate = txt_LicensePlate.getText();
+        String brand = txt_Brand.getText();
+        String model = txt_Model.getText();
+        String color = txt_Color.getText();
+        int ownerID = Integer.parseInt(txt_OwnerId.getText());
+        Car car = new Car(ID, licensePlate, brand, model, color, ownerID);
+        CarController.addCar(car);
+        list.add(car);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Автомобиль добавлен");
+    }
 
-    public void getSelected(javafx.scene.input.MouseEvent mouseEvent){
+    public void Delete() {
+        int id = Integer.parseInt(txt_ID.getText());
+        CarController.deleteCar(id);
+        list.remove(index);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Информация удалена");
+    }
+
+    public void Edit() {
+        String licensePlate = txt_LicensePlate.getText();
+        String brand = txt_Brand.getText();
+        String model = txt_Model.getText();
+        String color = txt_Color.getText();
+        int ownerID = Integer.parseInt(txt_OwnerId.getText());
+        int id = Integer.parseInt(txt_ID.getText());
+        Car car = new Car(id, licensePlate, brand, model, color, ownerID);
+        CarController.updateCar(car);
+        list.set(index, car);
+        JOptionPane.showMessageDialog(null, "Информация обновлена");
+        //clearFields();
+    }
+
+    @FXML
+    public void getSelected() {
         index = Table.getSelectionModel().getSelectedIndex();
-        if (index <=-1){
+        if (index <= -1) {
             return;
         }
+
         txt_ID.setText(ID.getCellData(index).toString());
         txt_LicensePlate.setText(LicensePlate.getCellData(index));
         txt_Brand.setText(Brand.getCellData(index));
@@ -79,60 +114,12 @@ public class CarPageController  {
         txt_OwnerId.setText(OwnerID.getCellData(index).toString());
     }
 
-   public void addCar() {
-        try {
-            pst = conn.prepareStatement(INSERT);
-            pst.setString(2, txt_LicensePlate.getText());
-            pst.setString(3, txt_Brand.getText());
-            pst.setString(4, txt_Model.getText());
-            pst.setString(5, txt_Color.getText());
-            pst.setInt(6, Integer.parseInt(txt_OwnerId.getText()));
-            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-
-
-            JOptionPane.showMessageDialog(null, "Автомобиль успешно добавлен");
-            pst.execute();
-            initialize();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void Edit(){
-        try {
-            String id = txt_ID.getText();
-            String licensePlate = txt_LicensePlate.getText();
-            String brand = txt_Brand.getText();
-            String model = txt_Model.getText();
-            String color = txt_Color.getText();
-            String ownerId = txt_OwnerId.getText();
-
-            String sql = "UPDATE Cars SET LicensePlate = '" + licensePlate +
-                    "', Brand = '" + brand +
-                    "', Model = '" + model +
-                    "', Color = '" + color +
-                    "', OwnerID = '" + ownerId +
-                    "' WHERE ID = " + id + "; ";
-
-            pst = conn.prepareStatement(sql);
-            JOptionPane.showMessageDialog(null, "Информация обновлена");
-            pst.executeUpdate();
-            initialize();
-        }catch (Exception e){
-        }
-    }
-    public void Delete(){
-        try {
-            pst = conn.prepareStatement(DELETE);
-            pst.setString(1, txt_ID.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Информация удалена");
-            initialize();
-
-        }
-        catch (Exception e){
-
-        }
-    }
+    /*private void clearFields() {
+        txt_ID.setText("");
+        txt_LicensePlate.setText("");
+        txt_Brand.setText("");
+        txt_Model.setText("");
+        txt_Color.setText("");
+        txt_OwnerId.setText("");
+    }*/
 }

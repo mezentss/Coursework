@@ -31,7 +31,7 @@
                <children>
                   <ImageView fitHeight="220.0" fitWidth="206.0" layoutX="258.0" layoutY="-73.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-34-482.png" />
+                        <Image url="AutorepairWhite.png" />
                      </image>
                   </ImageView>
                </children>
@@ -41,7 +41,7 @@
       </AnchorPane>
       <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="263.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+            <Image url="LogoWhite.png" />
          </image>
       </ImageView>
       <Button fx:id="toRegistrationButton" layoutX="492.0" layoutY="32.0" mnemonicParsing="false" onAction="#SignUpPageShow" prefHeight="34.0" prefWidth="164.0" style="-fx-background-color: ffffffff; -fx-border-color: ffffffff; -fx-border-radius: 4;" text="Зарегестрироваться" textFill="#ff2c24">
@@ -66,7 +66,7 @@
       </AnchorPane>
       <ImageView fitHeight="112.0" fitWidth="216.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
+            <Image url="Карась.png" />
          </image>
       </ImageView>
    </children>

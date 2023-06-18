@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PersonalAccountController">
+<AnchorPane prefHeight="452.0" prefWidth="706.0" style="-fx-background-color: FF2C24;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountPageController">
    <children>
       <Pane prefHeight="452.0" prefWidth="540.0" style="-fx-background-color: ffffffff;">
          <children>
@@ -61,12 +61,12 @@
          </children></Pane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="7.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
+            <Image url="Карась.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="565.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+            <Image url="LogoWhite.png" />
          </image>
       </ImageView>
       <Button fx:id="mainPage" layoutX="564.0" layoutY="216.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="158.0" style="-fx-background-color: white;" text="Главная страница" textFill="#ff2c24">

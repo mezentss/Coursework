@@ -1,8 +1,12 @@
-package Car;
+import java.sql.Connection;
 
 public class Car {
     private int _id, _ownerId;
+    private Connection _connection;
     private String _licensePlate, _brand, _model, _color;
+    public Car(Connection connection){
+        _connection = connection;
+    }
 
     public Car(int id, String licensePlate, String brand, String model, String color, int ownerId){
         _id = id;
@@ -13,7 +17,7 @@ public class Car {
         _ownerId = ownerId;
 
     }
-
+    public Connection getConnection() {return _connection;}
     public int getID() {return _id;}
     public int getOwnerID() {
         return _ownerId;

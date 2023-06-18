@@ -1,5 +1,3 @@
-import Sale.Sale;
-import Sale.SaleController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +17,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Employee.EmployeeController._connection;
 
-public class SalesPageController  {
+public class SalePageController {
+    public SalePageController(Sale sale){_sale = sale;}
+    public SalePageController(){}
+    private static Sale _sale;
     @FXML
     private TableColumn<Sale, Integer> ID, ServiceID, PartID;
     @FXML
@@ -33,15 +33,13 @@ public class SalesPageController  {
     int index = -1;
     private Stage mainStage;
     PreparedStatement pst = null;
-    private static final String INSERT = "INSERT INTO Sales VALUES (?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Sales WHERE ID = ?";
-
-
+    public void setMainStage(Stage primaryStage) {mainStage = primaryStage;}
     public void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         ServiceID.setCellValueFactory(new PropertyValueFactory<>("ServiceID"));
         PartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         show.setOnAction(this::assemblingButton);
+
         list = SaleController.getSales();
         Table.setItems(list);
 
@@ -50,7 +48,6 @@ public class SalesPageController  {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
-                //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
                 controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
@@ -72,53 +69,31 @@ public class SalesPageController  {
     }
 
     public void addSale() {
-        try {
-            pst = _connection.prepareStatement(INSERT);
-            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-            pst.setString(2, txt_ServiceID.getText());
-            pst.setString(3, txt_PartID.getText());
-
-
-            JOptionPane.showMessageDialog(null, "Сотрудник успешно добавлен");
-            pst.execute();
-            initialize();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        int ServiceID = Integer.parseInt(txt_ServiceID.getText());
+        int PartID = Integer.parseInt(txt_PartID.getText());
+        Sale sale = new Sale(ID, ServiceID, PartID);
+        SaleController.addSale(sale);
+        list.add(sale);
+        JOptionPane.showMessageDialog(null, "Сборка добавлена");
     }
 
     public void Edit(){
-        try {
-            String id = txt_ID.getText();
-            String ServiceID = txt_ServiceID.getText();
-            String PartID = txt_PartID.getText();
-
-            String sql = "UPDATE Sales SET ServiceID = '" + ServiceID +
-                    "', PartID = '" + PartID +
-                    "' WHERE ID = " + id + "; ";
-
-            pst = _connection.prepareStatement(sql);
-            JOptionPane.showMessageDialog(null, "Информация обновлена");
-            pst.executeUpdate();
-            initialize();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Информация не обновлена.");
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        int ServiceID = Integer.parseInt(txt_ServiceID.getText());
+        int PartID = Integer.parseInt(txt_PartID.getText());
+        Sale sale = new Sale(ID, ServiceID, PartID);
+        SaleController.updateSale(sale);
+        list.set(index, sale);
+        JOptionPane.showMessageDialog(null, "Информация обновлена");
     }
 
     public void Delete(){
-        try {
-            pst = _connection.prepareStatement(DELETE);
-            pst.setString(1, txt_ID.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Информация удалена");
-            initialize();
-
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Информация не удалена.");
-        }
+        int id = Integer.parseInt(txt_ID.getText());
+        SaleController.deleteSale(id);
+        list.remove(index);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Информация удалена");
     }
 
     @FXML
@@ -130,7 +105,7 @@ public class SalesPageController  {
                     "JOIN Parts ON Sales.PartID = Parts.ID " +
                     "WHERE Sales.ServiceID = " + id;
 
-            pst = _connection.prepareStatement(sql);
+            pst = _sale.getConnection().prepareStatement(sql);
             pst.execute();
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -140,9 +115,5 @@ public class SalesPageController  {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setMainStage(Stage primaryStage) {
-        mainStage = primaryStage;
     }
 }

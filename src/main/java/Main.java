@@ -1,10 +1,3 @@
-import Account.AccountController;
-import Car.CarController;
-import Customer.CustomerController;
-import Employee.EmployeeController;
-import Part.PartController;
-import Sale.SaleController;
-import Service.ServiceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,20 +25,43 @@ public class Main extends Application{
             connection = DriverManager.getConnection(
                     "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2258_coursework",
                     "std_2258_coursework", "00000000");
-            CarController carController = new CarController(connection);
-            EmployeeController employeeController = new EmployeeController(connection);
-            SaleController saleController = new SaleController(connection);
-            CustomerController customerController = new CustomerController(connection);
-            PartController partController = new PartController(connection);
-            ServiceController serviceController = new ServiceController(connection);
-            AccountController accountController = new AccountController(connection);
+
+            SystemLoginController systemLoginController = new SystemLoginController(connection);
+
+            Car car = new Car(connection);
+            CarPageController carPageController = new CarPageController(car);
+            CarController carController = new CarController(car, carPageController);
+
+            Employee employee = new Employee(connection);
+            EmployeePageController employeePageController = new EmployeePageController(employee);
+            EmployeeController employeeController = new EmployeeController(employee, employeePageController);
+
+            Sale sale = new Sale(connection);
+            SalePageController salePageController = new SalePageController(sale);
+            SaleController saleController = new SaleController(sale, salePageController);
+
+            Customer customer = new Customer(connection);
+            CustomerPageController customerPageController = new CustomerPageController(customer);
+            CustomerController customerController = new CustomerController(customer, customerPageController);
+
+            Part part = new Part(connection);
+            PartPageController partPageController = new PartPageController(part);
+            PartController partController = new PartController(part, partPageController);
+
+            Service service = new Service(connection);
+            ServicePageController servicePageController = new ServicePageController(service);
+            ServiceController serviceController = new ServiceController(service, servicePageController);
+
+            Account account = new Account(connection);
+            AccountPageController accountPageController = new AccountPageController(account);
+            AccountController accountController = new AccountController(account, accountPageController);
             launch(args);
-                }
-        catch(Exception e){
-                    System.out.println(e);
-                }
-            }
         }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
 
 
 

@@ -49,12 +49,12 @@
             </Text>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="506.0" layoutY="252.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
+                  <Image url="Карась.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="206.0" fitWidth="250.0" layoutX="250.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-23-475.png" />
+                  <Image url="AutorepairBlack.png" />
                </image>
             </ImageView>
             <Button fx:id="exit" layoutX="14.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" style="-fx-background-color: FF2C24;" text="Выход" textFill="WHITE" />
@@ -62,12 +62,12 @@
       </Pane>
       <ImageView fitHeight="201.0" fitWidth="180.0" layoutX="263.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Picsart_23-06-06_10-01-43-922.png" />
+            <Image url="LogoWhite.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Политех/Курсовая%20работа/Карась.png" />
+            <Image url="Карась.png" />
          </image>
       </ImageView>
       <Button fx:id="personalAccount" layoutX="507.0" layoutY="32.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" style="-fx-background-color: white;" text="Личный кабинет" textFill="#ff2c24">

@@ -73,7 +73,7 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Sales.fxml"));
             Parent root = loader.load();
-            SalesPageController controller = loader.getController();
+            SalePageController controller = loader.getController();
             controller.setMainStage(mainStage);
             Scene scene = new Scene(root);
             mainStage.setScene(scene);
@@ -133,7 +133,7 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonalAccount.fxml"));
             Parent root = loader.load();
-            PersonalAccountController controller = loader.getController();
+            AccountPageController controller = loader.getController();
             controller.setMainStage(mainStage);
             Scene scene = new Scene(root);
             mainStage.setScene(scene);

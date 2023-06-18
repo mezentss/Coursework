@@ -12,16 +12,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Employee.EmployeeController._connection;
 
-public class PersonalAccountController {
+public class AccountPageController {
+    private static Account _account;
     private Stage mainStage;
     @FXML
     private TextField address, login, name, password, post;
     @FXML
     private Button Change, mainPage;
     PreparedStatement pst = null;
-
+    public AccountPageController(Account account){_account = account;}
+    public AccountPageController(){}
     @FXML
     void initialize() {
         setEmployeeData();
@@ -46,7 +47,7 @@ public class PersonalAccountController {
     public void setEmployeeData() {
         try {
             String sql = "SELECT * FROM Employees WHERE ID = ?";
-            pst = _connection.prepareStatement(sql);
+            pst = _account.getConnection().prepareStatement(sql);
             pst.setInt(1, SystemLoginController.ID);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -69,19 +70,22 @@ public class PersonalAccountController {
             String Post = post.getText();
             String Login = login.getText();
             String Password = password.getText();
+            System.out.println(SystemLoginController.ID);
 
             String sql = "UPDATE Employees SET Name = '" + Name +
                     "', Address = '" + Address +
-                    "', Post = '" + Post +
+                    "', AccessLevel = '" + Post +
                     "', Login = '" + Login +
                     "', Password = '" + Password +
                     "' WHERE ID = " + SystemLoginController.ID + "; ";
+            System.out.println(sql);
 
-            pst = _connection.prepareStatement(sql);
+            pst = _account.getConnection().prepareStatement(sql);
             JOptionPane.showMessageDialog(null, "Информация обновлена");
             pst.executeUpdate();
             initialize();
         }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ошибка");
         }
     }
 }

@@ -1,8 +1,9 @@
-package Customer;
+import java.sql.Connection;
 
 public class Customer {
     private int _id;
     private String _name, _address, _phone;
+    private Connection _connection;
 
     public Customer(int id, String name, String address, String phone){
         _id = id;
@@ -10,8 +11,9 @@ public class Customer {
         _address = address;
         _phone = phone;
     }
+    public Customer(Connection connection){_connection = connection;}
 
-    public int getId() {
+    public int getID() {
         return _id;
     }
 
@@ -42,5 +44,6 @@ public class Customer {
     public void setPhone(String phone) {
         _phone = phone;
     }
+    public Connection getConnection(){return  _connection;}
 
 }

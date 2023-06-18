@@ -1,4 +1,3 @@
-import Customer.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +13,6 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import static Customer.CustomerController._connection;
-
 public class CustomerPageController  {
     @FXML
     private TableColumn<Customer, String> Name, Address, Phone;
@@ -29,15 +24,16 @@ public class CustomerPageController  {
     ObservableList <Customer> list;
     int index = -1;
     private Stage mainStage;
+    private static Customer _customer;
     PreparedStatement pst = null;
-    private static final String INSERT = "INSERT INTO Customers VALUES (?, ?, ?, ?)";
-    private static final String DELETE = "DELETE FROM Customers WHERE ID = ?";
     @FXML
     private Button MenuBotton;
 
-
+    public CustomerPageController(Customer customer){_customer = customer;}
+    public CustomerPageController(){}
+    public void setMainStage(Stage primaryStage) {mainStage = primaryStage;}
     public void initialize(){
-        ID.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         Address.setCellValueFactory(new PropertyValueFactory<>("Address"));
         Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
@@ -50,7 +46,6 @@ public class CustomerPageController  {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
                 Parent root = loader.load();
                 MainPageController controller = loader.getController();
-                //controller.setWelcomeText("Welcome, " + loginField.getText() + "!");
                 controller.setMainStage(mainStage);
                 Scene scene = new Scene(root);
                 mainStage.setScene(scene);
@@ -73,58 +68,37 @@ public class CustomerPageController  {
     }
 
     public void addCustomer() {
-        try {
-            pst = _connection.prepareStatement(INSERT);
-            pst.setInt(1, Integer.parseInt(txt_ID.getText()));
-            pst.setString(2, txt_Name.getText());
-            pst.setString(3, txt_Address.getText());
-            pst.setString(4, txt_Phone.getText());
-
-
-            JOptionPane.showMessageDialog(null, "Клиент успешно добавлен");
-            pst.execute();
-            initialize();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        int ID = Integer.parseInt(txt_ID.getText());
+        String Name = txt_Name.getText();
+        String Address = txt_Address.getText();
+        String Phone = txt_Phone.getText();
+        Customer customer = new Customer(ID, Name, Address, Phone);
+        CustomerController.addCustomer(customer);
+        list.add(customer);
+        //clearFields();
+        JOptionPane.showMessageDialog(null, "Владелец добавлен");
     }
-
     public void Edit(){
-        try {
-            String id = txt_ID.getText();
-            String Name = txt_Name.getText();
-            String Address = txt_Address.getText();
-            String Post = txt_Phone.getText();
-
-            String sql = "UPDATE Customers SET Name = '" + Name +
-                    "', Address = '" + Address +
-                    "', Post = '" + Post +
-                    "' WHERE ID = " + id + "; ";
-
-            pst = _connection.prepareStatement(sql);
-            JOptionPane.showMessageDialog(null, "Информация обновлена");
-            pst.executeUpdate();
-            initialize();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Информация не обновлена.");
-        }
+        String Name = txt_Name.getText();
+        String Address = txt_Address.getText();
+        String Phone = txt_Phone.getText();
+        int ID = Integer.parseInt(txt_ID.getText());
+        Customer customer = new Customer(ID, Name, Address, Phone);
+        CustomerController.updateCustomer(customer);
+        list.set(index, customer);
+        JOptionPane.showMessageDialog(null, "Информация обновлена");
     }
-
     public void Delete(){
-        try {
-            pst = _connection.prepareStatement(DELETE);
-            pst.setString(1, txt_ID.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Информация удалена");
-            initialize();
-
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Информация не удалена.");
-        }
+        int id = Integer.parseInt(txt_ID.getText());
+        CustomerController.deleteCustomer(id);
+        list.remove(index);
+        clearFields();
+        JOptionPane.showMessageDialog(null, "Информация удалена");
     }
-    public void setMainStage(Stage primaryStage) {
-        mainStage = primaryStage;
+    private void clearFields() {
+        txt_ID.setText("");
+        txt_Name.setText("");
+        txt_Address.setText("");
+        txt_Phone.setText("");
     }
 }
