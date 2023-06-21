@@ -16,7 +16,6 @@ public class MainPageController {
 
     public void setMainStage(Stage stage) {
         mainStage = stage;
-        System.out.println(SystemLoginController.accessLevel);
         Customers.setOnAction(this::handleCustomersButton);
         Details.setOnAction(this::handlePartsButton);
         Employees.setOnAction(this::handleEmployeesButton);

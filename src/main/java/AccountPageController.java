@@ -5,13 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 public class AccountPageController {
     private static Account _account;
@@ -52,8 +50,6 @@ public class AccountPageController {
                 name.setText(rs.getString("Name"));
                 address.setText(rs.getString("Address"));
                 post.setText(rs.getString("AccessLevel"));
-                login.setText(rs.getString("Login"));
-                password.setText(rs.getString("Password"));
             }
         } catch (SQLException ex) {
             System.out.println("Ошибка при извлечении данных о сотруднике: " + ex.getMessage());
@@ -66,7 +62,8 @@ public class AccountPageController {
             String Post = post.getText();
             String Login = login.getText();
             String Password = password.getText();
-            String sql = "UPDATE Employees SET Name = '" + Name + "', Address = '" + Address + "', AccessLevel = '" + Post + "', Login = '" + Login + "', Password = '" + Password + "' WHERE ID = " + SystemLoginController.ID + "; ";
+            String Hash = SystemLoginController.hashPassword(Password);
+            String sql = "UPDATE Employees SET Name = '" + Name + "', Address = '" + Address + "', AccessLevel = '" + Post + "', Login = '" + Login + "', Password = '" + Hash + "' WHERE ID = " + SystemLoginController.ID + "; ";
             pst = _account.getConnection().prepareStatement(sql);
             JOptionPane.showMessageDialog(null, "Информация обновлена");
             pst.executeUpdate();
@@ -75,4 +72,5 @@ public class AccountPageController {
             JOptionPane.showMessageDialog(null, "Ошибка");
         }
     }
+
 }
