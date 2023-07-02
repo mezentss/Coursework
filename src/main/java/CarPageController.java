@@ -96,7 +96,7 @@ public class CarPageController {
         CarController.updateCar(car);
         list.set(index, car);
         JOptionPane.showMessageDialog(null, "Информация обновлена");
-        //clearFields();
+        clearFields();
     }
 
     @FXML
@@ -105,7 +105,6 @@ public class CarPageController {
         if (index <= -1) {
             return;
         }
-
         txt_ID.setText(ID.getCellData(index).toString());
         txt_LicensePlate.setText(LicensePlate.getCellData(index));
         txt_Brand.setText(Brand.getCellData(index));
@@ -114,12 +113,12 @@ public class CarPageController {
         txt_OwnerId.setText(OwnerID.getCellData(index).toString());
     }
 
-    /*private void clearFields() {
+    private void clearFields() {
         txt_ID.setText("");
         txt_LicensePlate.setText("");
         txt_Brand.setText("");
         txt_Model.setText("");
         txt_Color.setText("");
         txt_OwnerId.setText("");
-    }*/
+    }
 }

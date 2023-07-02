@@ -74,6 +74,15 @@ public class SystemLoginController {
                     Scene scene = new Scene(root);
                     mainStage.setScene(scene);
                     ID = rs.getInt("ID");
+                    try {
+                        pst = _connection.prepareStatement(sqlAccess);
+                        pst.setInt(1, ID);
+                        rs = pst.executeQuery();
+                        if(rs.next()){accessLevel = rs.getString(1);
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Неверный логин или пароль");
                 }
@@ -82,15 +91,6 @@ public class SystemLoginController {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Ошибка");
-        }
-        try {
-            pst = _connection.prepareStatement(sqlAccess);
-            pst.setInt(1, ID);
-            rs = pst.executeQuery();
-            if(rs.next()){accessLevel = rs.getString(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

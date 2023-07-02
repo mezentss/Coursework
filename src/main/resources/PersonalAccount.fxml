@@ -53,9 +53,9 @@
                   <Font name="Bookman Old Style" size="25.0" />
                </font>
             </Text>
-            <Text layoutX="27.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Данные для входа в аккаунт:">
+            <Text layoutX="27.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Изменить данные для входа в аккаунт:">
                <font>
-                  <Font name="Bookman Old Style" size="25.0" />
+                  <Font name="Bookman Old Style" size="23.0" />
                </font>
             </Text>
          </children></Pane>
